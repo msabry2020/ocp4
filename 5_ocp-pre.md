@@ -1,0 +1,11 @@
+#Openshift_Tools#
+wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.10.66/openshift-client-linux-4.10.66.tar.gz 
+wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.10.66/openshift-install-linux-4.10.66.tar.gz 
+tar xvf openshift-client-linux-4.10.66.tar.gz -C /usr/bin/ 
+tar xvf openshift-install-linux-4.10.66.tar.gz -C /usr/bin/ 
+
+#SSH_Key#
+ssh-keygen -t rsa -b 4096 -N '' -f .ssh/ocp4upi 
+
+#Pull_Secret#
+cp config/pull-secret .

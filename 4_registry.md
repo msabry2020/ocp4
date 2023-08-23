@@ -1,0 +1,19 @@
+wget https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz
+tar xvf mirror-registry.tar.gz -C /usr/bin
+mirror-registry install --quayHostname mirror.ocp4demo.local --quayRoot quay 
+cp ./quay/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/ 
+update-ca-trust extract 
+podman login -u init -p <token> mirror.ocp4demo.local:8443
+cat pull-secret | jq . > pull-secret.json  
+echo -n 'init:<token>' | base64 -w0 
+vim pull-secret.json
+
+export OCP_RELEASE='4.10.66' 
+export LOCAL_REGISTRY=mirror.ocp4demo.local:8443 
+export LOCAL_REPOSITORY=ocp4/openshift4 
+export PRODUCT_REPO='openshift-release-dev' 
+export RELEASE_NAME="ocp-release" 
+export LOCAL_SECRET_JSON='/root/pull-secret.json' 
+export ARCHITECTURE=x86_64 
+
+oc adm release mirror -a ${LOCAL_SECRET_JSON} --from=quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_RELEASE}-${ARCHITECTURE} --to=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} --to-release-image=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE} 

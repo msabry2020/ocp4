@@ -1,0 +1,35 @@
+apiVersion: v1
+baseDomain: ocp4demo.local
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 2
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: ocp4
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 192.168.1.0/24
+  networkType: OVNKubernetes 
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  none: {}
+imageContentSources:
+- mirrors:
+  - mirror.ocp4demo.local:8443/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - mirror.ocp4demo.local:8443/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+pullSecret: ''
+sshKey: ''
+additionalTrustBundle: |
