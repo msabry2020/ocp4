@@ -1,6 +1,6 @@
 wget https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz
 tar xvf mirror-registry.tar.gz -C /usr/bin
-mirror-registry install --quayHostname mirror.ocp4demo.local --quayRoot quay 
+mirror-registry install
 cp ./quay/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/ 
 update-ca-trust extract 
 podman login -u init -p <token> mirror.ocp4demo.local:8443
