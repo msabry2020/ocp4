@@ -1,1 +1,1 @@
-yum -i install openssl podman
+yum -y install openssl podman
