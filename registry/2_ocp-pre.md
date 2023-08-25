@@ -8,7 +8,5 @@ openshift-install coreos print-stream-json | grep -Eo '"https.*(kernel-|initramf
 rsync -av images /var/www/html/openshif4/ 
 
 #SSH_Key#
-ssh-keygen -t rsa -b 4096 -N '' -f .ssh/cp4dupi 
+ssh-keygen -t rsa -b 4096 -N '' -f .ssh/ocp4upi 
 
-#Pull_Secret#
-cp config/pull-secret .
