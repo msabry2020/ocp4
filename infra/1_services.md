@@ -8,8 +8,8 @@ mkdir /var/lib/tftpboot/pxelinux.cfg/
 
 #DNS#
 /usr/bin/cp named.conf /etc/named.conf
-/usr/bin/cp nbe.com.eg..zone /var/named/
-/usr/bin/cp nbe.com.eg..reverse.zone /var/named/
+/usr/bin/cp nbe.com.eg.zone /var/named/
+/usr/bin/cp nbe.com.eg.reverse.zone /var/named/
 
 #LB#
 /usr/bin/cp haproxy.cfg /etc/haproxy/haproxy.cfg
