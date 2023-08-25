@@ -23,3 +23,8 @@ mkdir -p /var/www/html/openshift4/images
 mkdir -p /var/www/html/openshift4/ignitions
 openshift-install coreos print-stream-json | grep -Eo '"https.*(kernel-|initramfs.|rootfs.)\w+(\.img)?"' | grep x86 | xargs wget -P /var/www/html/openshift4/images/
 restorecon -Rv /var/www/html/openshift4
+systemctl enable --now dhcpd 
+systemctl enable --now named
+systemctl enable --now tftp
+systemctl enable --now haproxy 
+systemctl enable --now httpd
