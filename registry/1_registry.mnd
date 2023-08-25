@@ -3,14 +3,14 @@ tar xvf mirror-registry.tar.gz -C /usr/bin
 mirror-registry install --quayHostname mirror.cp4d.nbe.com.eg
 cp ./quay/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/ 
 update-ca-trust extract 
-podman login -u init -p <token> mirror.ocp4demo.local:8443
+podman login -u init -p <token> mirror.nbe.com.eg:8443
 cat pull-secret | jq . > pull-secret.json  
 echo -n 'init:<token>' | base64 -w0 
 vim pull-secret.json
 
 export OCP_RELEASE='4.10.66' 
-export LOCAL_REGISTRY=mirror.ocp4demo.local:8443 
-export LOCAL_REPOSITORY=ocp4/openshift4 
+export LOCAL_REGISTRY=mirror.nbe.com.eg:8443 
+export LOCAL_REPOSITORY=cp4d/openshift4 
 export PRODUCT_REPO='openshift-release-dev' 
 export RELEASE_NAME="ocp-release" 
 export LOCAL_SECRET_JSON='/root/pull-secret.json' 

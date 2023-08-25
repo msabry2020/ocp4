@@ -5,7 +5,7 @@ tar xvf openshift-client-linux-4.10.66.tar.gz -C /usr/bin/
 tar xvf openshift-install-linux-4.10.66.tar.gz -C /usr/bin/ 
 
 #SSH_Key#
-ssh-keygen -t rsa -b 4096 -N '' -f .ssh/ocp4upi 
+ssh-keygen -t rsa -b 4096 -N '' -f .ssh/cp4dupi 
 
 #Pull_Secret#
 cp config/pull-secret .

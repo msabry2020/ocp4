@@ -1,25 +1,25 @@
 $TTL 1W
-@	IN	SOA	dns.ocp4.ocp4demo.local.	root.ocp4demo.local (
+@	IN	SOA	dns.cp4d.nbe.com.eg.	root.nbe.com.eg (
 			2023080800	; serial
 			3H		; refresh (3 hours)
 			30M		; retry (30 minutes)
 			2W		; expiry (2 weeks)
 			1W )		; minimum (1 week)
 
-	IN	NS	dns.ocp4.ocp4demo.local.
+	IN	NS	dns.cp4d.nbe.com.eg.
 
-dns.ocp4		IN A 192.168.50.111
+dns.cp4d		IN A 192.168.50.111
 mirror			IN A 192.168.50.111
 ;
-api.ocp4		IN A 192.168.50.110
-api-int.ocp4		IN A 192.168.50.110
-*.apps.ocp4		IN A 192.168.50.110
+api.cp4d		IN A 192.168.50.110
+api-int.cp4d		IN A 192.168.50.110
+*.apps.cp4d		IN A 192.168.50.110
 ;
-bootstrap.ocp4		IN A 192.168.50.9 
+bootstrap.cp4d		IN A 192.168.50.9 
 ;
-master01.ocp4		IN A 192.168.50.10
-master02.ocp4		IN A 192.168.50.11 
-master03.ocp4		IN A 192.168.50.12 
+master01.cp4d		IN A 192.168.50.10
+master02.cp4d		IN A 192.168.50.11 
+master03.cp4d		IN A 192.168.50.12 
 ;
-worker01.ocp4		IN A 192.168.50.13 
-worker02.ocp4		IN A 192.168.50.14
+worker01.cp4d		IN A 192.168.50.13 
+worker02.cp4d		IN A 192.168.50.14
