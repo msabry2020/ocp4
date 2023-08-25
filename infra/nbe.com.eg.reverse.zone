@@ -8,8 +8,8 @@ $TTL 1W
 
 	IN	NS	dns.cp4d.nbe.com.eg.
 
-111  IN PTR api.cp4d.example.com.
-111  IN PTR api-int.cp4d.example.com.
+254  IN PTR api.cp4d.example.com.
+254  IN PTR api-int.cp4d.example.com.
 9 IN PTR bootstrap.cp4d.example.com.
 10 IN PTR master01.cp4d.example.com.
 11 IN PTR master02.cp4d.example.com.

@@ -13,8 +13,8 @@ mkdir /var/lib/tftpboot/pxelinux.cfg/
 
 #LB#
 /usr/bin/cp haproxy.cfg /etc/haproxy/haproxy.cfg
-semanage boolean -m --on haproxy_connect_any
-setsebool -P haproxy_connect_any=1
+#semanage boolean -m --on haproxy_connect_any
+#setsebool -P haproxy_connect_any=1
 
 
 #HTTP#

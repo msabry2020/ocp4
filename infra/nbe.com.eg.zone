@@ -8,12 +8,11 @@ $TTL 1W
 
 	IN	NS	dns.cp4d.nbe.com.eg.
 
-dns.cp4d		IN A 192.168.50.111
-registry.cp4d		IN A 192.168.50.222
+dns.cp4d		IN A 192.168.50.254
 ;
-api.cp4d		IN A 192.168.50.111
-api-int.cp4d		IN A 192.168.50.111
-*.apps.cp4d		IN A 192.168.50.111
+api.cp4d		IN A 192.168.50.254
+api-int.cp4d		IN A 192.168.50.254
+*.apps.cp4d		IN A 192.168.50.254
 ;
 bootstrap.cp4d		IN A 192.168.50.9 
 ;

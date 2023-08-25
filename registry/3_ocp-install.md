@@ -5,7 +5,7 @@ rm -f openshift/99_openshift-cluster-api_master-machines-*.yaml openshift/99_ope
 sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml 
 openshift-install create ignition-configs --dir=.
 chmod +r *.ign
-rsync -av *.ign infra:/var/www/html/openshift4/ignitions/
+rsync -av *.ign /var/www/html/openshift4/ignitions/
 
 openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
 openshift-install wait-for install-complete  --dir=. --log-level=debug
