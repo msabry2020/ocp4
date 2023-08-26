@@ -3,16 +3,16 @@ prompt 0
 timeout 50
 menu title **** OpenShift 4 Bootstrap PXE Boot Menu ****
 
-label Install CoreOS 4.10 Bootstrap Node
- kernel http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-kernel-x86_64
- append ip=dhcp rd.neednet=1 coreos.inst.install_dev=vda console=tty0 console=ttyS0 coreos.inst=yes coreos.live.rootfs_url=http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-rootfs.x86_64.img coreos.inst.ignition_url=http://192.168.50.254:8080/openshift4/ignitions/bootstrap.ign initrd=http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-initramfs.x86_64.img
+label Install CoreOS OCP_RELEASE Bootstrap Node
+ kernel http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-kernel-x86_64
+ append ip=dhcp rd.neednet=1 coreos.inst.install_dev=DISK console=tty0 console=ttyS0 coreos.inst=yes coreos.live.rootfs_url=http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-rootfs.x86_64.img coreos.inst.ignition_url=http://HTTP_SERVER_IP:8080/openshift4/ignitions/bootstrap.ign initrd=http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-initramfs.x86_64.img
 
 
-label Install CoreOS 4.10 Master Node
- kernel http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-kernel-x86_64
- append ip=dhcp rd.neednet=1 coreos.inst.install_dev=vda console=tty0 console=ttyS0 coreos.inst=yes coreos.live.rootfs_url=http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-rootfs.x86_64.img coreos.inst.ignition_url=http://192.168.50.254:8080/openshift4/ignitions/master.ign initrd=http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-initramfs.x86_64.img
+label Install CoreOS OCP_RELEASE Master Node
+ kernel http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-kernel-x86_64
+ append ip=dhcp rd.neednet=1 coreos.inst.install_dev=DISK console=tty0 console=ttyS0 coreos.inst=yes coreos.live.rootfs_url=http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-rootfs.x86_64.img coreos.inst.ignition_url=http://HTTP_SERVER_IP:8080/openshift4/ignitions/master.ign initrd=http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-initramfs.x86_64.img
 
 
-label Install CoreOS 4.10 Worker Node
- kernel http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-kernel-x86_64
- append ip=dhcp rd.neednet=1 coreos.inst.install_dev=vda console=tty0 console=ttyS0 coreos.inst=yes coreos.live.rootfs_url=http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-rootfs.x86_64.img coreos.inst.ignition_url=http://192.168.50.254:8080/openshift4/ignitions/worker.ign initrd=http://192.168.50.254:8080/openshift4/images/rhcos-410.84.202210040010-0-live-initramfs.x86_64.img
+label Install CoreOS OCP_RELEASE Worker Node
+ kernel http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-kernel-x86_64
+ append ip=dhcp rd.neednet=1 coreos.inst.install_dev=DISK console=tty0 console=ttyS0 coreos.inst=yes coreos.live.rootfs_url=http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-rootfs.x86_64.img coreos.inst.ignition_url=http://HTTP_SERVER_IP:8080/openshift4/ignitions/worker.ign initrd=http://HTTP_SERVER_IP:8080/openshift4/images/rhcos-live-initramfs.x86_64.img
