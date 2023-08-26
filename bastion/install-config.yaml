@@ -1,5 +1,5 @@
 apiVersion: v1
-baseDomain: nbe.com.eg
+baseDomain: BASE_DOMAIN
 compute:
 - hyperthreading: Enabled
   name: worker
@@ -9,7 +9,7 @@ controlPlane:
   name: master
   replicas: 3
 metadata:
-  name: cp4d
+  name: CLUSTER_NAME
 networking:
   clusterNetwork:
   - cidr: 10.128.0.0/14
@@ -20,7 +20,13 @@ networking:
 platform:
   none: {}
 fips: false
-sshkey: ''
-pullSecret: ''
+sshkey: 'SSH_KEY'
+pullSecret: 'PULL_SECRET'
 imageContentSources:
-additionalTrustBundle: |
+- mirrors:
+  - registry.CLUSTER_NAME.BASE_DOMAIN:8443/CLUSTER_NAME/openshift4
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - registry.CLUSTER_NAME.BASE_DOMAIN:8443/CLUSTER_NAME/openshift4
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+additionalTrustBundle: | 

@@ -2,19 +2,32 @@
 
 # Set the variables
 INSTALL_DIR="${HOME}/install"
+CLUSTER_NAME='cp4d'
+BASE_DOMAIN='nbe.com.eg'
+SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
+PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
+CERT=$(cat ~/quay-install/quay-config/ssl.cert)
+
+set -x
 
 # Create the install directory
 rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
 
 # Copy the install-config.yaml file to the install directory
-cp bastion/install-config.yaml $INSTALL_DIR
+cp install-config.yaml $INSTALL_DIR
 
 # Change directory to the install directory
 cd $INSTALL_DIR
 
 # Edit the the install-config file
-vim install-config.yaml
+####vim install-config.yaml
+sed -i "s|CLUSTER_NAME|${CLUSTER_NAME}|g" install-config.yaml
+sed -i "s|BASE_DOMAIN|${BASE_DOMAIN}|g" install-config.yaml
+sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
+sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
+sed  's/^/  /' ~/quay-install/quay-config/ssl.cert >> install-config.yaml
+
 
 # Create the manifests
 openshift-install create manifests --dir=.
@@ -38,7 +51,7 @@ rsync -av *.ign infra:/var/www/html/openshift4/ignitions/
 openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
 
 # Wait for the install to complete
-openshift-install wait-for install-complete  --dir=. --log-level=debug
+#openshift-install wait-for install-complete  --dir=. --log-level=debug
 
 # Approve the pending CSRs that are not yet approved
-oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs --no-run-if-empty oc adm certificate approve
+#oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs --no-run-if-empty oc adm certificate approve
