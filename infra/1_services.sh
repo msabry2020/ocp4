@@ -4,9 +4,17 @@
 BASE_DOMAIN='nbe.com.eg'
 CLUSTER_NAME='cp4d'
 INFRA_IP='192.168.50.111'
+REGISTRY_IP='192.168.50.222'
 LB_OCT=$(echo $INFRA_IP | awk -F. '{print $4}')
 MAC='00:05:69:00:00'
 DISK='sda'
+
+# Backup existing config files
+cp /var/lib/tftpboot/pxelinux.cfg/default /var/lib/tftpboot/pxelinux.cfg/default.bkp
+cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bkp
+cp /etc/named.conf /etc/named.conf.bkp
+cp /var/named/${BASE_DOMAIN}.zone /var/named/${BASE_DOMAIN}.zone.bkp
+cp /var/named/${BASE_DOMAIN}.reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone.bkp
 
 # PXE # 
 sed -i "s/HTTP_SERVER_IP/${INFRA_IP}/g" default
@@ -32,7 +40,7 @@ sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" reverse.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" reverse.zone
 cp named.conf /etc/named.conf
 cp forward.zone /var/named/${BASE_DOMAIN}.zone 
-cp reverse.zone /var/named/${BASE_DOMAIN}.reverse.zon
+cp reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone
 
 # HAProxy #
 cp haproxy.cfg /etc/haproxy/haproxy.cfg 
