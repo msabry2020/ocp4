@@ -1,9 +1,10 @@
-i#!/bin/bash
+#!/bin/bash
 
 # Set the variables
 INSTALL_DIR="${HOME}/install"
 
 # Create the install directory
+rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
 
 # Copy the install-config.yaml file to the install directory
@@ -11,6 +12,9 @@ cp bastion/install-config.yaml $INSTALL_DIR
 
 # Change directory to the install directory
 cd $INSTALL_DIR
+
+# Edit the the install-config file
+vim install-config.yaml
 
 # Create the manifests
 openshift-install create manifests --dir=.
