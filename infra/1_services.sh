@@ -3,8 +3,9 @@
 # Set the variables
 BASE_DOMAIN='nbe.com.eg'
 CLUSTER_NAME='cp4d'
-INFRA_IP='192.168.50.111'
-REGISTRY_IP='192.168.50.222'
+SUBNET='192.168.50'
+INFRA_IP="${SUBNET}.111"
+REGISTRY_IP="${SUBNET}.222"
 LB_OCT=$(echo $INFRA_IP | awk -F. '{print $4}')
 MAC='00:05:69:00:00'
 DISK='sda'
@@ -27,10 +28,13 @@ sed -i "s/MAC/${MAC}/g" dhcpd.conf
 sed -i "s/GW/${INFRA_IP}/g" dhcpd.conf
 sed -i "s/DNS/${INFRA_IP}/g" dhcpd.conf
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" dhcpd.conf
+sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
+sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf 
 
 # DNS #
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" named.conf 
+sed -i "s/SUBNET/${SUBNET}/g" forward.zone 
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" forward.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" forward.zone
 sed -i "s/INFRA_IP/${INFRA_IP}/g" forward.zone
