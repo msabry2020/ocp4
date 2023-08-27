@@ -48,6 +48,8 @@ cp reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone
 
 # HAProxy #
 cp haproxy.cfg /etc/haproxy/haproxy.cfg 
+semanage boolean -m --on haproxy_connect_any
+setsebool -P haproxy_connect_any=1
 
 # HTTPD # 
 cp httpd.conf /etc/httpd/conf/httpd.conf
