@@ -15,7 +15,7 @@ ARCHITECTURE=x86_64
 podman login -u init -p $TOKEN $LOCAL_REGISTRY 
 
 # Get the pull secret
-cat pull-secret | jq . > $LOCAL_SECRET_JSON
+cat ~/ocp4/bastion/pull-secret | jq . > $LOCAL_SECRET_JSON
 
 # Convert the pull secret to base64
 echo -n "init:${TOKEN}" | base64 -w0
