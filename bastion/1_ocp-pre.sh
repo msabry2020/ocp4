@@ -15,7 +15,7 @@ tar xvf /tmp/openshift-install-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 
 # Download the OpenShift images
 mkdir /tmp/images
-openshift-install coreos print-stream-json | grep -Eo '"https.*(kernel-)\w+(\.img)?"' | grep x86 | xargs wget -O /tmp/images/rhcos-live-kernel-x86_6
+openshift-install coreos print-stream-json | grep -Eo '"https.*(kernel-)\w+(\.img)?"' | grep x86 | xargs wget -O /tmp/images/rhcos-live-kernel-x86_64
 openshift-install coreos print-stream-json | grep -Eo '"https.*(initramfs.)\w+(\.img)?"' | grep x86 | xargs wget -O /tmp/images/rhcos-live-initramfs.x86_64.img
 openshift-install coreos print-stream-json | grep -Eo '"https.*(rootfs.)\w+(\.img)?"' | grep x86 | xargs wget -O /tmp/images/rhcos-live-rootfs.x86_64.img
 

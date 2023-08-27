@@ -20,6 +20,7 @@ cp /var/named/${BASE_DOMAIN}.reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone
 # PXE # 
 sed -i "s/HTTP_SERVER_IP/${INFRA_IP}/g" default
 sed -i "s/DISK/${DISK}/g" default
+mkdir /var/lib/tftpboot/pxelinux.cfg
 cp default /var/lib/tftpboot/pxelinux.cfg
 cp -r /usr/share/syslinux/* /var/lib/tftpboot
 
