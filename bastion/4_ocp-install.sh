@@ -16,7 +16,7 @@ rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
 
 # Copy the install-config.yaml file to the install directory
-cp install-config.yaml $INSTALL_DIR
+cp ~/ocp4/bastion/install-config.yaml $INSTALL_DIR
 
 # Change directory to the install directory
 cd $INSTALL_DIR
@@ -49,7 +49,7 @@ chmod +r *.ign
 rsync -av *.ign infra:/var/www/html/openshift4/ignitions/
 
 # Wait for the bootstrap to complete
-openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
+#openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
 
 # Wait for the install to complete
 #openshift-install wait-for install-complete  --dir=. --log-level=debug
