@@ -29,6 +29,8 @@ sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
 sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
 sed  's/^/  /' ~/quay-install/quay-config/ssl.cert >> install-config.yaml
 
+# Backup install-config file
+cp install-config.yaml /tmp
 
 # Create the manifests
 openshift-install create manifests --dir=.
