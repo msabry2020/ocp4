@@ -4,6 +4,7 @@
 INSTALL_DIR="${HOME}/install"
 CLUSTER_NAME='cp4d'
 BASE_DOMAIN='nbe.com.eg'
+REGISTRY_TOKEN="$1"
 SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
 CERT=$(cat ~/quay-install/quay-config/ssl.cert)
