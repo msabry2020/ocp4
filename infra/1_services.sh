@@ -1,37 +1,18 @@
 #!/bin/bash
 
 # Set the variables
-BASE_DOMAIN='nbe.com.eg'
-CLUSTER_NAME='cp4d'
-SUBNET='192.168.50'
-INFRA_IP="${SUBNET}.111"
-REGISTRY_IP="${SUBNET}.222"
+BASE_DOMAIN='nbe.ahly.bank'
+CLUSTER_NAME='plz-vmware-sit-c01'
+SUBNET='xxx.yyy.zzz'
+REVERSE_SUBNET='xxx.yyy.zzz'
+INFRA_IP="${SUBNET}.abc"
+REGISTRY_IP="${SUBNET}.xyz"
 LB_OCT=$(echo $INFRA_IP | awk -F. '{print $4}')
-MAC='00:05:69:00:00'
-DISK='sda'
 
 # Backup existing config files
-cp /var/lib/tftpboot/pxelinux.cfg/default /var/lib/tftpboot/pxelinux.cfg/default.bkp
-cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bkp
 cp /etc/named.conf /etc/named.conf.bkp
 cp /var/named/${BASE_DOMAIN}.zone /var/named/${BASE_DOMAIN}.zone.bkp
 cp /var/named/${BASE_DOMAIN}.reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone.bkp
-
-# PXE # 
-sed -i "s/HTTP_SERVER_IP/${INFRA_IP}/g" default
-sed -i "s/DISK/${DISK}/g" default
-mkdir /var/lib/tftpboot/pxelinux.cfg
-cp default /var/lib/tftpboot/pxelinux.cfg
-cp -r /usr/share/syslinux/* /var/lib/tftpboot
-
-# DHCP #
-sed -i "s/MAC/${MAC}/g" dhcpd.conf
-sed -i "s/GW/${INFRA_IP}/g" dhcpd.conf
-sed -i "s/DNS/${INFRA_IP}/g" dhcpd.conf
-sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" dhcpd.conf
-sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
-sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
-cp dhcpd.conf /etc/dhcp/dhcpd.conf 
 
 # DNS #
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" named.conf 
@@ -48,13 +29,13 @@ cp forward.zone /var/named/${BASE_DOMAIN}.zone
 cp reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone
 
 # HAProxy #
+sed -i "s/SUBNET/${SUBNET}/g" haproxy.cfg
 cp haproxy.cfg /etc/haproxy/haproxy.cfg 
-semanage boolean -m --on haproxy_connect_any
-setsebool -P haproxy_connect_any=1
+#semanage boolean -m --on haproxy_connect_any
+#setsebool -P haproxy_connect_any=1
 
 # HTTPD # 
 cp httpd.conf /etc/httpd/conf/httpd.conf
-mkdir -p /var/www/html/openshift4/images
 mkdir -p /var/www/html/openshift4/ignitions
 restorecon -Rv /var/www/html/openshift4
 
