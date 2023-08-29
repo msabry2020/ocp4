@@ -2,7 +2,7 @@
 set -x
 
 # Set the variables
-REGISTRY="registry.cp4d.nbe.com.eg"
+REGISTRY="registry.plz-vmware-sit-c01.nbe.ahly.bank"
 
 # Download the mirror registry binary
 wget https://mirror.openshift.com/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz -P /tmp
@@ -23,4 +23,3 @@ cp quay-install/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/
 
 # Update the CA trust store
 update-ca-trust extract
-

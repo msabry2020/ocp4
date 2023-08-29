@@ -4,7 +4,7 @@ set -x
 # Set the variables
 TOKEN="$1"
 OCP_RELEASE='4.10.66'
-LOCAL_REGISTRY=registry.cp4d.nbe.com.eg:8443
+LOCAL_REGISTRY='registry.plz-vmware-sit-c01.nbe.ahly.bank:8443'
 LOCAL_REPOSITORY=cp4d/openshift4
 PRODUCT_REPO='openshift-release-dev'
 RELEASE_NAME="ocp-release"
