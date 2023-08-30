@@ -1,4 +1,4 @@
 #!/bin/bash
 set -x
 
-yum -y install openssl podman
+yum -y install openssl podman jq

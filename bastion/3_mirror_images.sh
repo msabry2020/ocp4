@@ -1,5 +1,11 @@
 #!/bin/bash
-set -x
+
+# Check if the script was called with an argument
+if [ $# -eq 0 ]; then
+  echo 'Error: No argument passed'
+  echo 'Please pass the init password for the private registry'
+  exit 1
+fi
 
 # Set the variables
 TOKEN="$1"
