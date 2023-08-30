@@ -58,7 +58,14 @@ echo "-----------------------------------"
 
 echo '# HAProxy Configuration #'
 set -x
-sed -i "s/SUBNET/${SUBNET}/g" haproxy.cfg
+sed -i "s/BOOTSTRAP_IP/${BOOTSTRAP_IP}/g" haproxy.cfg
+sed -i "s/MASTER01_IP/${MASTER01_IP}/g" haproxy.cfg
+sed -i "s/MASTER02_IP/${MASTER02_IP}/g" haproxy.cfg
+sed -i "s/MASTER03_IP/${MASTER03_IP}/g" haproxy.cfg
+sed -i "s/WORKER01_IP/${WORKER01_IP}/g" haproxy.cfg
+sed -i "s/WORKER02_IP/${WORKER02_IP}/g" haproxy.cfg
+sed -i "s/WORKER03_IP/${WORKER03_IP}/g" haproxy.cfg
+
 cp haproxy.cfg /etc/haproxy/haproxy.cfg 
 semanage boolean -m --on haproxy_connect_any
 setsebool -P haproxy_connect_any=1
