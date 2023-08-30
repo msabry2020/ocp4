@@ -21,6 +21,7 @@ echo "-----------------------------------"
 echo '# DNS Configuration #'
 set -x
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" named.conf 
+sed -i "s/REVERSE_SUBNET/${REVERSE_SUBNET}/g" named.conf 
 sed -i "s/SUBNET/${SUBNET}/g" forward.zone 
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" forward.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" forward.zone
@@ -29,7 +30,6 @@ sed -i "s/REGISTRY_IP/${REGISTRY_IP}/g" forward.zone
 sed -i "s/LB_OCT/$LB_OCT/g" reverse.zone
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" reverse.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" reverse.zone
-sed -i "s/REVERSE_SUBNET/${REVERSE_SUBNET}/g" reverse.zone
 cp named.conf /etc/named.conf
 cp forward.zone /var/named/${BASE_DOMAIN}.zone 
 cp reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone
