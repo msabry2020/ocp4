@@ -2,6 +2,7 @@
 
     bootstrap_record=bootstrap.plz-vmware-sit-c01.nbe.ahly.bank
     bastion_record=bastion.plz-vmware-sit-c01.nbe.ahly.bank
+    registry_record=registry.plz-vmware-sit-c01.nbe.ahly.bank
     master1=master01.plz-vmware-sit-c01.nbe.ahly.bank
     master2=master02.plz-vmware-sit-c01.nbe.ahly.bank
     master3=master03.plz-vmware-sit-c01.nbe.ahly.bank
@@ -11,6 +12,7 @@
     storage=storage.plz-vmware-sit-c01.nbe.ahly.bank
     api_record=api.plz-vmware-sit-c01.nbe.ahly.bank
     api_int_record=api-int.plz-vmware-sit-c01.nbe.ahly.bank
+    infra_record=infra.plz-vmware-sit-c01.nbe.ahly.bank
     wildcard_routes_record=*.apps.plz-vmware-sit-c01.nbe.ahly.bank
 
     success_count=0
@@ -47,6 +49,12 @@
     check_dns_resolution "$bastion_record"
     echo "-------------------------------------"
 
+    check_dns_resolution "$registry_record"
+    echo "-------------------------------------"
+    
+    check_dns_resolution "$infra_record"
+    echo "-------------------------------------"
+
     check_dns_resolution "$master1"
     echo "-------------------------------------"
 
@@ -65,7 +73,7 @@
     check_dns_resolution "$worker3"
     echo "-------------------------------------"
 
-    check_dns_resolution "$storage1"
+    check_dns_resolution "$storage"
     echo "-------------------------------------"
 
     check_dns_resolution "$api_record"
