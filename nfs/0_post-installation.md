@@ -1,7 +1,5 @@
 ## Configure NFS Storage ##
 ---------------------------
-# NFS Host #
-...........
 yum -y install nfs-utils
 mkdir /nfs
 echo '/nfs *(rw,sync,no_wdelay,no_root_squash,insecure,fsid=0)' > /etc/exports
@@ -16,8 +14,6 @@ showmount -e
 
 ## Configure NFS Dynamic Storage Provisioner ##
 ---------------------------------------------
-# Bastion Host #
-...............
 git clone https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner/
 cp /root/ocp4/nfs/*.yaml /root/nfs-subdir-external-provisioner/deploy/
 
@@ -36,13 +32,9 @@ oc create -f /root/nfs-subdir-external-provisioner/deploy/deployment.yaml
 oc create -f /root/nfs-subdir-external-provisioner/deploy/class.yaml
 oc create -f /root/nfs-subdir-external-provisioner/deploy/test-claim.yaml
 
-podman pull busybox
-podman tag docker.io/library/busybox:latest registry.plz-vmware-sit-c01.nbe.ahly.bank:8443/init/busybox:latest
-podman login -u init -p Q78G9q1mNxP64Lti52h3uFEeayVZbHS0 registry.plz-vmware-sit-c01.nbe.ahly.bank:8443
-podman push registry.plz-vmware-sit-c01.nbe.ahly.bank:8443/init/busybox:latest
-oc create -f deploy/test-pod.yaml
 
-
+## Create Nginx Test App ##
+-------------------------
 podman pull docker.io/bitnami/nginx
 podman tag docker.io/bitnami/nginx:latest registry.plz-vmware-sit-c01.nbe.ahly.bank:8443/init/nginx:latest
 podman login -u init -p Ex76J13posk54tjze8mOwSVYC02Z9gGT registry.plz-vmware-sit-c01.nbe.ahly.bank:8443
@@ -51,3 +43,21 @@ oc new-project nginx-test-project
 oc new-app --insecure-registry=true --name nginx-test-app --image registry.plz-vmware-sit-c01.nbe.ahly.bank:8443/init/nginx:latest
 oc expose svc/nginx-test-app
 curl http://nginx-test-app-nginx-test-project.apps.plz-vmware-sit-c01.nbe.ahly.bank
+
+## Configure Identity Provider ##
+-------------------------------
+yum -y install htppd-tools
+htpasswd -c -B -b /tmp/htpasswd admin redhat
+oc create secret generic localusers --from-file htpasswd=/tmp/htpasswd -n openshift-config
+oc adm policy add-cluster-role-to-user cluster-admin admin
+oc edit oauth/cluster
+  identityProviders:
+    - htpasswd:
+        fileData:
+          name: localusers
+      mappingMethod: claim
+      name: myusers
+      type: HTPasswd
+
+watch oc get pods -n openshift-authentication
+oc login -u admin -p redhat https://api.plz-vmware-sit-c01.nbe.ahly.bank:6443
