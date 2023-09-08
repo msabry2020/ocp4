@@ -11,7 +11,7 @@ fi
 TOKEN="$1"
 OCP_RELEASE='4.10.66'
 LOCAL_REGISTRY='registry.plz-vmware-sit-c01.nbe.ahly.bank:8443'
-LOCAL_REPOSITORY=cp4d/openshift4
+LOCAL_REPOSITORY=plz-vmware-sit-c01/openshift4
 PRODUCT_REPO='openshift-release-dev'
 RELEASE_NAME="ocp-release"
 LOCAL_SECRET_JSON="${HOME}/pull-secret.json"
