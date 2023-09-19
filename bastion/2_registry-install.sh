@@ -24,6 +24,4 @@ cp quay-install/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/
 # Update the CA trust store
 update-ca-trust extract
 
-echo $INIT_PASSWORD
-
 ./3_mirror_images.sh
