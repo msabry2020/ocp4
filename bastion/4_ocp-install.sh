@@ -6,9 +6,9 @@ INSTALL_DIR="$NBE_HOME/install"
 CLUSTER_NAME='plz-vmware-sit-c01'
 BASE_DOMAIN='nbe.ahly.bank'
 REGISTRY_TOKEN=$(cat $NBE_HOME/quay-install/registry_token.64)
-SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
+SSH_KEY=$(cat $NBE_HOME/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
-CERT=$(cat ~/quay-install/quay-config/ssl.cert)
+CERT=$(cat $NBE_HOME/quay-install/quay-config/ssl.cert)
 
 set -x
 
@@ -31,7 +31,7 @@ sed -i "s|CLUSTER_NAME|${CLUSTER_NAME}|g" install-config.yaml
 sed -i "s|BASE_DOMAIN|${BASE_DOMAIN}|g" install-config.yaml
 sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
 sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
-sed  's/^/  /' ~/quay-install/quay-config/ssl.cert >> install-config.yaml
+sed  's/^/  /' $NBE_HOME/quay-install/quay-config/ssl.cert >> install-config.yaml
 
 # Backup install-config file
 cp install-config.yaml /tmp
