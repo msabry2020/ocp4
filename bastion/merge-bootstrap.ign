@@ -3,7 +3,7 @@
     "config": {
       "merge": [
         {
-          "source": "infra.plz-vmware-sit-c01.nbe.ahly.bank:8080/openshift4/ignitions/bootstrap.ign", 
+          "source": "http://infra.plz-vmware-sit-c01.nbe.ahly.bank:8080/openshift4/ignitions/bootstrap.ign", 
           "verification": {}
         }
       ]
