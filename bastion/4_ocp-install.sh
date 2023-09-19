@@ -1,18 +1,11 @@
 #!/bin/bash
 
-# Check if the script was called with an argument
-if [ $# -eq 0 ]; then
-  echo 'Error: No argument passed'
-  echo 'Please pass the base64 encoded token for the private registry'  
-  exit 1
-fi
-
 # Set the variables
 NBE_HOME="/nbe"
 INSTALL_DIR="$NBE_HOME/install"
 CLUSTER_NAME='plz-vmware-sit-c01'
 BASE_DOMAIN='nbe.ahly.bank'
-REGISTRY_TOKEN="$1"
+REGISTRY_TOKEN=$(cat $NBE_HOME/quay-install/registry_token.64)
 SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
 CERT=$(cat ~/quay-install/quay-config/ssl.cert)
