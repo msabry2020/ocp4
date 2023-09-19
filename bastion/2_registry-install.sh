@@ -3,7 +3,7 @@ set -x
 
 # Set the variables
 REGISTRY="registry.plz-vmware-sit-c01.nbe.ahly.bank"
-INIT_PASSWORD=$(openssl rand --base64 20)
+export INIT_PASSWORD=$(openssl rand --base64 20)
 # Download the mirror registry binary
 wget https://mirror.openshift.com/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz -P /tmp
 
