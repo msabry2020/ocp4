@@ -26,6 +26,8 @@ mkdir $INSTALL_DIR
 # Copy the install-config.yaml file to the install directory
 cp install-config.yaml $INSTALL_DIR
 cp merge-bootstrap.ign $INSTALL_DIR
+cp merge-master.ign $INSTALL_DIR
+cp merge-worker.ign $INSTALL_DIR
 
 # Change directory to the install directory
 cd $INSTALL_DIR
@@ -54,13 +56,13 @@ sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluste
 openshift-install create ignition-configs --dir=.
 
 # Change the permissions of the ignition config files
-chmod +r bootstrap.ign
+chmod +r *.ign
 
 # Copy the ignition config files to the infra node
-rsync -av bootstrap.ign infra.plz-vmware-sit-c01.nbe.ahly.bank:/var/www/html/openshift4/ignitions/
+rsync -av *.ign infra.plz-vmware-sit-c01.nbe.ahly.bank:/var/www/html/openshift4/ignitions/
 
-base64 -w0 master.ign > master.64
-base64 -w0 worker.ign > worker.64
+base64 -w0 merge-master.ign > merge-master.64
+base64 -w0 merge-worker.ign > merge-worker.64
 base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
 
 # Wait for the bootstrap to complete
