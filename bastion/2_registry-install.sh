@@ -17,11 +17,10 @@ firewall-cmd --add-port=8443/tcp --permanent
 firewall-cmd --reload
 
 # Install the mirror registry
-cd $NBE_HOME
-mirror-registry install --quayHostname $REGISTRY --initPassword $INIT_PASSWORD
+mirror-registry install --quayHostname $REGISTRY --quayRoot $NBE_HOME/quay-install --initPassword $INIT_PASSWORD
 
 # Copy the root CA certificate to the CA trust store
-cp quay-install/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/
+cp $NBE_HOME/quay-install/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchors/
 
 # Update the CA trust store
 update-ca-trust extract
