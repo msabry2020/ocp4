@@ -1,25 +1,33 @@
 $TTL 1W
-@	IN	SOA	dns.CLUSTER_NAME.BASE_DOMAIN.	root.BASE_DOMAIN (
-			2023080800	; serial
-			3H		; refresh (3 hours)
-			30M		; retry (30 minutes)
-			2W		; expiry (2 weeks)
-			1W )		; minimum (1 week)
+@       IN      SOA     dns.CLUSTER_NAME.BASE_DOMAIN.   root.BASE_DOMAIN (
+                        2023080800      ; serial
+                        3H              ; refresh (3 hours)
+                        30M             ; retry (30 minutes)
+                        2W              ; expiry (2 weeks)
+                        1W )            ; minimum (1 week)
 
-	IN	NS	dns.CLUSTER_NAME.BASE_DOMAIN.
+        IN      NS      dns.CLUSTER_NAME.BASE_DOMAIN.
 
-dns.CLUSTER_NAME			IN A INFRA_IP
-registry.CLUSTER_NAME			IN A REGISTRY_IP
+infra.CLUSTER_NAME                      IN A INFRA_IP
+dns.CLUSTER_NAME                        IN A INFRA_IP
+api.CLUSTER_NAME                        IN A INFRA_IP
+api-int.CLUSTER_NAME                    IN A INFRA_IP
+*.apps.CLUSTER_NAME                     IN A INFRA_IP
 ;
-api.CLUSTER_NAME			IN A INFRA_IP
-api-int.CLUSTER_NAME			IN A INFRA_IP
-*.apps.CLUSTER_NAME			IN A INFRA_IP
+bastion.CLUSTER_NAME                    IN A BASTION_IP
+registry.CLUSTER_NAME                   IN A BASTION_IP 
 ;
-bootstrap.CLUSTER_NAME			IN A SUBNET.10 
+storage.CLUSTER_NAME                    IN A STORAGE_IP
 ;
-master01.CLUSTER_NAME			IN A SUBNET.11
-master02.CLUSTER_NAME			IN A SUBNET.12 
-master03.CLUSTER_NAME			IN A SUBNET.13 
+was.CLUSTER_NAME                        IN A WAS_IP
 ;
-worker01.CLUSTER_NAME			IN A SUBNET.14 
-worker02.CLUSTER_NAME			IN A SUBNET.15
+bootstrap.CLUSTER_NAME                  IN A BOOTSTRAP_IP 
+;
+master01.CLUSTER_NAME                   IN A MASTER01_IP
+master02.CLUSTER_NAME                   IN A MASTER02_IP
+master03.CLUSTER_NAME                   IN A MASTER03_IP
+;
+worker01.CLUSTER_NAME                   IN A WORKER01_IP 
+worker02.CLUSTER_NAME                   IN A WORKER02_IP
+worker03.CLUSTER_NAME                   IN A WORKER03_IP
+

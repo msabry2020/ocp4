@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Set the variables
-INSTALL_DIR="${HOME}/install"
-CLUSTER_NAME='cp4d'
-BASE_DOMAIN='nbe.com.eg'
-REGISTRY_TOKEN="$1"
-SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
+NBE_HOME="/nbe"
+INSTALL_DIR="$NBE_HOME/install"
+CLUSTER_NAME='plz-vmware-sit-c01'
+BASE_DOMAIN='nbe.ahly.bank'
+REGISTRY_TOKEN=$(cat $NBE_HOME/quay-install/registry_token.64)
+SSH_KEY=$(cat $NBE_HOME/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
-CERT=$(cat ~/quay-install/quay-config/ssl.cert)
+CERT=$(cat $NBE_HOME/quay-install/quay-config/ssl.cert)
 
 set -x
 
@@ -16,7 +17,10 @@ rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
 
 # Copy the install-config.yaml file to the install directory
-cp ~/ocp4/bastion/install-config.yaml $INSTALL_DIR
+cp install-config.yaml $INSTALL_DIR
+cp merge-bootstrap.ign $INSTALL_DIR
+cp merge-master.ign $INSTALL_DIR
+cp merge-worker.ign $INSTALL_DIR
 
 # Change directory to the install directory
 cd $INSTALL_DIR
@@ -27,7 +31,7 @@ sed -i "s|CLUSTER_NAME|${CLUSTER_NAME}|g" install-config.yaml
 sed -i "s|BASE_DOMAIN|${BASE_DOMAIN}|g" install-config.yaml
 sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
 sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
-sed  's/^/  /' ~/quay-install/quay-config/ssl.cert >> install-config.yaml
+sed  's/^/  /' $NBE_HOME/quay-install/quay-config/ssl.cert >> install-config.yaml
 
 # Backup install-config file
 cp install-config.yaml /tmp
@@ -48,7 +52,11 @@ openshift-install create ignition-configs --dir=.
 chmod +r *.ign
 
 # Copy the ignition config files to the infra node
-rsync -av *.ign infra:/var/www/html/openshift4/ignitions/
+rsync -av *.ign infra.plz-vmware-sit-c01.nbe.ahly.bank:/var/www/html/openshift4/ignitions/
+
+base64 -w0 merge-master.ign > merge-master.64
+base64 -w0 merge-worker.ign > merge-worker.64
+base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
 
 # Wait for the bootstrap to complete
 #openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
