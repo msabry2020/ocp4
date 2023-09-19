@@ -25,7 +25,5 @@ cp $NBE_HOME/quay-install/quay-rootCA/rootCA.pem /etc/pki/ca-trust/source/anchor
 # Update the CA trust store
 update-ca-trust extract
 
-echo $INIT_PASSWORD > init_password.txt
+echo $INIT_PASSWORD > $NBE_HOME/quay-install/init_password.txt
 
-cd $NBE_HOME/ocp4/bastion
-./3_mirror_images.sh
