@@ -16,5 +16,3 @@ tar xvf /tmp/openshift-install-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 
 # Generate the SSH key
 ssh-keygen -t rsa -b 4096 -N '' -f ~/.ssh/$SSH_KEY_NAME
-
-mkdir $NBE_HOME
