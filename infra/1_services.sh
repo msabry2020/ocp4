@@ -20,14 +20,17 @@ set +x
 
 echo '# DNS Configuration #'
 set -x
+## named.conf ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" named.conf 
 sed -i "s/REVERSE_SUBNET/${REVERSE_SUBNET}/g" named.conf 
 
+## forward.zone ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" forward.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" forward.zone
 sed -i "s/INFRA_IP/${INFRA_IP}/g" forward.zone
 sed -i "s/BASTION_IP/${BASTION_IP}/g" forward.zone
 sed -i "s/STORAGE_IP/${STORAGE_IP}/g" forward.zone
+sed -i "s/WAS_IP/${WAS_IP}/g" forward.zone
 sed -i "s/BOOTSTRAP_IP/${BOOTSTRAP_IP}/g" forward.zone
 sed -i "s/MASTER01_IP/${MASTER01_IP}/g" forward.zone
 sed -i "s/MASTER02_IP/${MASTER02_IP}/g" forward.zone
@@ -36,11 +39,13 @@ sed -i "s/WORKER01_IP/${WORKER01_IP}/g" forward.zone
 sed -i "s/WORKER02_IP/${WORKER02_IP}/g" forward.zone
 sed -i "s/WORKER03_IP/${WORKER03_IP}/g" forward.zone
 
+## reverse.zone ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" reverse.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" reverse.zone
 sed -i "s/INFRA/$(echo $INFRA_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/BASTION/$(echo $BASTION_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/STORAGE/$(echo $STORAGE_IP | awk -F. '{print $4}')/g" reverse.zone
+sed -i "s/WAS/$(echo $WAS_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/BOOTSTRAP/$(echo $BOOTSTRAP_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/MASTER01/$(echo $MASTER01_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/MASTER02/$(echo $MASTER02_IP | awk -F. '{print $4}')/g" reverse.zone
