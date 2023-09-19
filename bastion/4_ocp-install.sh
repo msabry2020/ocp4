@@ -8,7 +8,8 @@ if [ $# -eq 0 ]; then
 fi
 
 # Set the variables
-INSTALL_DIR="${HOME}/install"
+NBE_HOME="/nbe"
+INSTALL_DIR="$NBE_HOME/install"
 CLUSTER_NAME='plz-vmware-sit-c01'
 BASE_DOMAIN='nbe.ahly.bank'
 REGISTRY_TOKEN="$1"
