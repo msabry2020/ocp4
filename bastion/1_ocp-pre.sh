@@ -2,9 +2,9 @@
 set -x
 
 # Set the variables
+NBE_HOME="/nbe"
 OCP_VERSION="4.10.66"
 SSH_KEY_NAME="ocp4upi"
-NBE_HOME="/nbe"
 
 # Download the OpenShift tools
 wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/$OCP_VERSION/openshift-client-linux-$OCP_VERSION.tar.gz -P /tmp
