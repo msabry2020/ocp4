@@ -19,6 +19,8 @@ registry.CLUSTER_NAME                   IN A BASTION_IP
 ;
 storage.CLUSTER_NAME                    IN A STORAGE_IP
 ;
+was.CLUSTER_NAME                        IN A WAS_IP
+;
 bootstrap.CLUSTER_NAME                  IN A BOOTSTRAP_IP 
 ;
 master01.CLUSTER_NAME                   IN A MASTER01_IP
