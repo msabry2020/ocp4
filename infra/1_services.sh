@@ -78,8 +78,34 @@ set +x
 sleep 5
 echo "-----------------------------------"
 
+echo '# PXE #'
+set -x
+sed -i "s/HTTP_SERVER_IP/${INFRA_IP}/g" default
+sed -i "s/DISK/${DISK}/g" default
+mkdir /var/lib/tftpboot/pxelinux.cfg
+cp default /var/lib/tftpboot/pxelinux.cfg
+cp -r /usr/share/syslinux/* /var/lib/tftpboot
+set +x
+sleep 5
+echo "-----------------------------------"
+
+echo '# DHCP #'
+set -x
+sed -i "s/MAC/${MAC}/g" dhcpd.conf
+sed -i "s/GW/${INFRA_IP}/g" dhcpd.conf
+sed -i "s/DNS/${INFRA_IP}/g" dhcpd.conf
+sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" dhcpd.conf
+sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
+sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
+cp dhcpd.conf /etc/dhcp/dhcpd.conf 
+set +x
+sleep 5
+echo "-----------------------------------"
+
 echo # Start and Enable Services #
 set -x
+systemctl enable --now dhcpd
+systemctl enable --now tftp
 systemctl enable --now named
 systemctl enable --now haproxy
 systemctl enable --now httpd
