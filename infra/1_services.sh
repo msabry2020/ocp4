@@ -5,13 +5,13 @@ BASE_DOMAIN='lab.local'
 CLUSTER_NAME='ocp412'
 REVERSE_SUBNET='50.168.192'
 INFRA_IP="192.168.50.163"
-BOOTSTRAP_IP="192.168.50.154"
-MASTER01_IP="192.168.50.155"
-MASTER02_IP="192.168.50.156"
-MASTER03_IP="192.168.50.157"
-WORKER01_IP="192.168.50.158"
-WORKER02_IP="192.168.50.159"
-WORKER03_IP="192.168.50.160"
+BOOTSTRAP_IP="192.168.50.9"
+MASTER01_IP="192.168.50.10"
+MASTER02_IP="192.168.50.11"
+MASTER03_IP="192.168.50.12"
+WORKER01_IP="192.168.50.13"
+WORKER02_IP="192.168.50.14"
+MAC='52:54:00:00:32'
 echo "-----------------------------------"
 set +x
 
@@ -31,7 +31,6 @@ sed -i "s/MASTER02_IP/${MASTER02_IP}/g" forward.zone
 sed -i "s/MASTER03_IP/${MASTER03_IP}/g" forward.zone
 sed -i "s/WORKER01_IP/${WORKER01_IP}/g" forward.zone
 sed -i "s/WORKER02_IP/${WORKER02_IP}/g" forward.zone
-sed -i "s/WORKER03_IP/${WORKER03_IP}/g" forward.zone
 
 ## reverse.zone ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" reverse.zone
@@ -43,7 +42,6 @@ sed -i "s/MASTER02/$(echo $MASTER02_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/MASTER03/$(echo $MASTER03_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/WORKER01/$(echo $WORKER01_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/WORKER02/$(echo $WORKER02_IP | awk -F. '{print $4}')/g" reverse.zone
-sed -i "s/WORKER03/$(echo $WORKER03_IP | awk -F. '{print $4}')/g" reverse.zone
 
 cp named.conf /etc/named.conf
 cp forward.zone /var/named/${BASE_DOMAIN}.zone 
@@ -81,7 +79,7 @@ echo "-----------------------------------"
 echo '# PXE #'
 set -x
 sed -i "s/HTTP_SERVER_IP/${INFRA_IP}/g" default
-sed -i "s/DISK/${DISK}/g" default
+sed -i "s/DISK/vda/g" default
 mkdir /var/lib/tftpboot/pxelinux.cfg
 cp default /var/lib/tftpboot/pxelinux.cfg
 cp -r /usr/share/syslinux/* /var/lib/tftpboot
@@ -91,12 +89,6 @@ echo "-----------------------------------"
 
 echo '# DHCP #'
 set -x
-sed -i "s/MAC/${MAC}/g" dhcpd.conf
-sed -i "s/GW/${INFRA_IP}/g" dhcpd.conf
-sed -i "s/DNS/${INFRA_IP}/g" dhcpd.conf
-sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" dhcpd.conf
-sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
-sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf 
 set +x
 sleep 5
