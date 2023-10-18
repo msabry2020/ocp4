@@ -20,7 +20,7 @@ openshift-install coreos print-stream-json | grep -Eo '"https.*(initramfs.)\w+(\
 openshift-install coreos print-stream-json | grep -Eo '"https.*(rootfs.)\w+(\.img)?"' | grep x86 | xargs wget -O /tmp/images/rhcos-live-rootfs.x86_64.img
 
 # Copy the OpenShift images to the infra node
-rsync -av /tmp/images infra:/var/www/html/openshift4/
+rsync -av /tmp/images /var/www/html/openshift4/
 
 # Generate the SSH key
 ssh-keygen -t rsa -b 4096 -N '' -f ~/.ssh/$SSH_KEY_NAME
