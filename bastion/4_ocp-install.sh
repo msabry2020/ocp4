@@ -2,12 +2,12 @@
 
 # Set the variables
 INSTALL_DIR="${HOME}/install"
-CLUSTER_NAME='cp4d'
-BASE_DOMAIN='nbe.com.eg'
-REGISTRY_TOKEN="$1"
+CLUSTER_NAME='do322'
+BASE_DOMAIN='lab.local'
+REGISTRY_TOKEN="cmVndXNlcjpJbnN0YWxsTTM="
 SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
-PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
-CERT=$(cat ~/quay-install/quay-config/ssl.cert)
+PULL_SECRET="{\"auths\":{\"nexus-registry-int.apps.tools-emea150.prod.ole.redhat.com\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
+#CERT=$(cat ~/quay-install/quay-config/ssl.cert)
 
 set -x
 
@@ -27,7 +27,7 @@ sed -i "s|CLUSTER_NAME|${CLUSTER_NAME}|g" install-config.yaml
 sed -i "s|BASE_DOMAIN|${BASE_DOMAIN}|g" install-config.yaml
 sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
 sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
-sed  's/^/  /' ~/quay-install/quay-config/ssl.cert >> install-config.yaml
+#sed  's/^/  /' ~/quay-install/quay-config/ssl.cert >> install-config.yaml
 
 # Backup install-config file
 cp install-config.yaml /tmp
@@ -48,7 +48,7 @@ openshift-install create ignition-configs --dir=.
 chmod +r *.ign
 
 # Copy the ignition config files to the infra node
-rsync -av *.ign infra:/var/www/html/openshift4/ignitions/
+rsync -av *.ign /var/www/html/openshift4/ignitions/
 
 # Wait for the bootstrap to complete
 #openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
