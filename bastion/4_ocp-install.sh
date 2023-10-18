@@ -2,7 +2,7 @@
 
 # Set the variables
 INSTALL_DIR="${HOME}/install"
-CLUSTER_NAME='do322'
+CLUSTER_NAME='ocp412'
 BASE_DOMAIN='lab.local'
 REGISTRY_TOKEN="cmVndXNlcjpJbnN0YWxsTTM="
 SSH_KEY=$(cat ~/.ssh/ocp4upi.pub)
