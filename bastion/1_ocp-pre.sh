@@ -2,7 +2,7 @@
 set -x
 
 # Set the variables
-OCP_VERSION="4.10.66"
+OCP_VERSION="4.12.9"
 SSH_KEY_NAME="ocp4upi"
 
 # Download the OpenShift tools
