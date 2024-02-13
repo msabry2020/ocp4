@@ -3,9 +3,12 @@
 set -x
 
 # Set the variables
-NBE_HOME="/nbe"
-NTP_SERVER_IP="172.16.0.9"
-ALLOWED_NETWORK="10.50.162.0/24"
+BASE_DOMAIN='lab.local'
+CLUSTER_NAME='ocp4'
+INSTALL_HOME="/opt/install"
+INSTALL_DIR=$INSTALL_HOME/ocp4_install
+NTP_SERVER_IP="10.11.31.199"
+ALLOWED_NETWORK="10.11.31.0/24"
 
 # Set NTP server IP on Bastion VM
 sed -i "s|pool 2.rhel.pool.ntp.org iburst|server ${NTP_SERVER_IP}|g" /etc/chrony.conf
@@ -18,31 +21,31 @@ systemctl restart chronyd.service
 chronyc sources
 
 # Download the Butane binary
-wget https://mirror.openshift.com/pub/openshift-v4/clients/butane/latest/butane-amd64 -P $NBE_HOME
+wget https://mirror.openshift.com/pub/openshift-v4/clients/butane/latest/butane-amd64 -P $INSTALL_HOME
 
 # Copy the binary to /usr/bin
-chmod u+x $NBE_HOME/butane-amd64
-mv $NBE_HOME/butane-amd64 /usr/bin/butane
+chmod u+x $INSTALL_HOME/butane-amd64
+cp $INSTALL_HOME/butane-amd64 /usr/bin/butane
 
 # Copy butane configs to the installation directory
-cp 99-master-chrony.bu $NBE_HOME/install/
-cp 99-worker-chrony.bu $NBE_HOME/install/
+cp 99-master-chrony.bu $INSTALL_DIR/
+cp 99-worker-chrony.bu $INSTALL_DIR/
 
 # Generate MachineConfig obhect files to contain the configuration for nodes
-/usr/bin/butane $NBE_HOME/install/99-master-chrony.bu -o $NBE_HOME/install/99-master-chrony.yaml
-/usr/bin/butane $NBE_HOME/install/99-worker-chrony.bu -o $NBE_HOME/install/99-worker-chrony.yaml
+/usr/bin/butane $INSTALL_DIR/99-master-chrony.bu -o $INSTALL_DIR/99-master-chrony.yaml
+/usr/bin/butane $INSTALL_DIR/99-worker-chrony.bu -o $INSTALL_DIR/99-worker-chrony.yaml
 
 # Apply time configurations
-export KUBECONFIG=$NBE_HOME/install/auth/kubeconfig
-oc apply -f $NBE_HOME/install/99-master-chrony.yaml
-oc apply -f $NBE_HOME/install/99-worker-chrony.yaml
+export KUBECONFIG=$INSTALL_DIR/auth/kubeconfig
+oc apply -f $INSTALL_DIR/99-master-chrony.yaml
+oc apply -f $INSTALL_DIR/99-worker-chrony.yaml
 
 # Check for each server if NTP source is as expected (run this command from Bastion VM)
 sleep 30
-vms=("master01" "master02" "master03" "worker01" "worker02" "worker03")
+vms=("control1" "control2" "control3" "infra1" "infra2" "infra3" "worker1" "worker2" "worker3")
 for VM_NAME in "${vms[@]}"
 do
-    ssh -i /nbe/ocp4upi core@$VM_NAME.plz-vmware-sit-c01.nbe.ahly.bank echo "Time on $VM_NAME sync with: " ; chronyc sources
+    ssh -i $INSTALL_HOME/ocp4upi core@$VM_NAME.$CLUSTER_NAME.$BASE_DOMAIN echo "Time on $VM_NAME sync with: " ; chronyc sources
     sleep 3
     echo -e "\n\n"
 done
