@@ -20,8 +20,7 @@ BOOTSTRAP_IP="10.11.31.210"
 MAC="56:6f:c4:78:00:0"
 BASTION_IP="10.11.31.200"
 DISK='vda'
-#STORAGE_IP="10.11.31.200"
-#WAS_IP="10.11.31.200"
+STORAGE_IP="10.11.31.211"
 
 echo "-----------------------------------"
 set +x
@@ -47,8 +46,7 @@ sed -i "s/WORKER01_IP/${WORKER01_IP}/g" forward.zone
 sed -i "s/WORKER02_IP/${WORKER02_IP}/g" forward.zone
 sed -i "s/WORKER03_IP/${WORKER03_IP}/g" forward.zone
 sed -i "s/BASTION_IP/${BASTION_IP}/g" forward.zone
-#sed -i "s/STORAGE_IP/${STORAGE_IP}/g" forward.zone
-#sed -i "s/WAS_IP/${WAS_IP}/g" forward.zone
+sed -i "s/STORAGE_IP/${STORAGE_IP}/g" forward.zone
 
 ## reverse.zone ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" reverse.zone
@@ -65,8 +63,7 @@ sed -i "s/WORKER01/$(echo $WORKER01_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/WORKER02/$(echo $WORKER02_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/WORKER03/$(echo $WORKER03_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/BASTION/$(echo $BASTION_IP | awk -F. '{print $4}')/g" reverse.zone
-#sed -i "s/STORAGE/$(echo $STORAGE_IP | awk -F. '{print $4}')/g" reverse.zone
-#sed -i "s/WAS/$(echo $WAS_IP | awk -F. '{print $4}')/g" reverse.zone
+sed -i "s/STORAGE/$(echo $STORAGE_IP | awk -F. '{print $4}')/g" reverse.zone
 
 cp named.conf /etc/named.conf
 cp forward.zone /var/named/${BASE_DOMAIN}.zone 
