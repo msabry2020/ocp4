@@ -127,6 +127,7 @@ sed -i "s/INFRA3_IP/${INFRA3_IP}/g" dhcpd.conf
 sed -i "s/WORKER1_IP/${WORKER1_IP}/g" dhcpd.conf
 sed -i "s/WORKER2_IP/${WORKER2_IP}/g" dhcpd.conf
 sed -i "s/WORKER3_IP/${WORKER3_IP}/g" dhcpd.conf
+sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf 
 set +x
