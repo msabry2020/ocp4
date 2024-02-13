@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Set the variables
-NBE_HOME="/nbe"
-INSTALL_DIR="$NBE_HOME/install"
-CLUSTER_NAME='plz-vmware-sit-c01'
-BASE_DOMAIN='nbe.ahly.bank'
-REGISTRY_TOKEN=$(cat $NBE_HOME/quay-install/registry_token.64)
-SSH_KEY=$(cat $NBE_HOME/ocp4upi.pub)
+INSTALL_HOME="/opt/install"
+INSTALL_DIR=$INSTALL_HOME/ocp4_install
+BASE_DOMAIN='lab.local'
+CLUSTER_NAME='ocp4'
+REGISTRY_TOKEN=$(cat $INSTALL_HOME/quay-install/registry_token.64)
+SSH_KEY=$(cat $INSTALL_HOME/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
-CERT=$(cat $NBE_HOME/quay-install/quay-config/ssl.cert)
+CERT=$(cat $INSTALL_HOME/quay-install/quay-config/ssl.cert)
 
 set -x
 
@@ -18,23 +18,19 @@ mkdir $INSTALL_DIR
 
 # Copy the install-config.yaml file to the install directory
 cp install-config.yaml $INSTALL_DIR
-cp merge-bootstrap.ign $INSTALL_DIR
-cp merge-master.ign $INSTALL_DIR
-cp merge-worker.ign $INSTALL_DIR
 
 # Change directory to the install directory
 cd $INSTALL_DIR
 
 # Edit the the install-config file
-####vim install-config.yaml
 sed -i "s|CLUSTER_NAME|${CLUSTER_NAME}|g" install-config.yaml
 sed -i "s|BASE_DOMAIN|${BASE_DOMAIN}|g" install-config.yaml
 sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
 sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
-sed  's/^/  /' $NBE_HOME/quay-install/quay-config/ssl.cert >> install-config.yaml
+sed  's/^/  /' $INSTALL_HOME/quay-install/quay-config/ssl.cert >> install-config.yaml
 
 # Backup install-config file
-cp install-config.yaml /tmp
+cp install-config.yaml $INSTALL_HOME
 
 # Create the manifests
 openshift-install create manifests --dir=.
@@ -51,12 +47,8 @@ openshift-install create ignition-configs --dir=.
 # Change the permissions of the ignition config files
 chmod +r *.ign
 
-# Copy the ignition config files to the infra node
-rsync -av *.ign infra.plz-vmware-sit-c01.nbe.ahly.bank:/var/www/html/openshift4/ignitions/
-
-base64 -w0 merge-master.ign > merge-master.64
-base64 -w0 merge-worker.ign > merge-worker.64
-base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
+# Copy the ignition config files to the utility node
+rsync -av *.ign utility.$CLUSTER_NAME.$BASE_DOMAIN:/var/www/html/openshift4/ignitions/
 
 # Wait for the bootstrap to complete
 #openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
