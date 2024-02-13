@@ -8,26 +8,28 @@ $TTL 1W
 
         IN      NS      dns.CLUSTER_NAME.BASE_DOMAIN.
 
-infra.CLUSTER_NAME                      IN A INFRA_IP
-dns.CLUSTER_NAME                        IN A INFRA_IP
-api.CLUSTER_NAME                        IN A INFRA_IP
-api-int.CLUSTER_NAME                    IN A INFRA_IP
-*.apps.CLUSTER_NAME                     IN A INFRA_IP
+utility.CLUSTER_NAME                      IN A UTIL_IP
+dns.CLUSTER_NAME                        IN A UTIL_IP
+api.CLUSTER_NAME                        IN A UTIL_IP
+api-int.CLUSTER_NAME                    IN A UTIL_IP
+*.apps.CLUSTER_NAME                     IN A UTIL_IP
 ;
 bastion.CLUSTER_NAME                    IN A BASTION_IP
 registry.CLUSTER_NAME                   IN A BASTION_IP 
 ;
 storage.CLUSTER_NAME                    IN A STORAGE_IP
 ;
-was.CLUSTER_NAME                        IN A WAS_IP
-;
 bootstrap.CLUSTER_NAME                  IN A BOOTSTRAP_IP 
 ;
-master01.CLUSTER_NAME                   IN A MASTER01_IP
-master02.CLUSTER_NAME                   IN A MASTER02_IP
-master03.CLUSTER_NAME                   IN A MASTER03_IP
+control1.CLUSTER_NAME                   IN A CONTROL1_IP
+control2.CLUSTER_NAME                   IN A CONTROL2_IP
+control3.CLUSTER_NAME                   IN A CONTROL3_IP
 ;
-worker01.CLUSTER_NAME                   IN A WORKER01_IP 
-worker02.CLUSTER_NAME                   IN A WORKER02_IP
-worker03.CLUSTER_NAME                   IN A WORKER03_IP
+infra1.CLUSTER_NAME                   IN A INFRA1_IP 
+infra2.CLUSTER_NAME                   IN A INFRA2_IP
+infra3.CLUSTER_NAME                   IN A INFRA3_IP
+;
+worker1.CLUSTER_NAME                   IN A WORKER1_IP 
+worker2.CLUSTER_NAME                   IN A WORKER2_IP
+worker3.CLUSTER_NAME                   IN A WORKER3_IP
 
