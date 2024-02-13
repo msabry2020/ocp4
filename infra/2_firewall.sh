@@ -17,4 +17,4 @@ done
 
 # Reload the firewall
 firewall-cmd --reload
-
+firewall-cmd --list-all
