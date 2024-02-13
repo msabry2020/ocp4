@@ -2,6 +2,7 @@
 set -x
 
 # Set the variables
+INSTALL_HOME="/opt/install"
 BASE_DOMAIN='lab.local'
 CLUSTER_NAME='ocp4'
 OCP_RELEASE="4.12"
@@ -28,4 +29,4 @@ wget $RHCOS_URL/rhcos-live-rootfs.x86_64.img -O /tmp/images/rhcos-live-rootfs.x8
 rsync -av /tmp/images utility.$CLUSTER_NAME.$BASE_DOMAIN:/var/www/html/openshift4/
 
 # Generate the SSH key
-ssh-keygen -t rsa -b 4096 -N '' -f ~/.ssh/$SSH_KEY_NAME
+ssh-keygen -t rsa -b 4096 -N '' -f $INSTALL_HOME/$SSH_KEY_NAME
