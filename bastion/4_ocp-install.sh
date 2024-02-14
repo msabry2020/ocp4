@@ -52,8 +52,8 @@ rsync -av *.ign utility.$CLUSTER_NAME.$BASE_DOMAIN:/var/www/html/openshift4/igni
 
 
 # Create base64-encoded ignition files
-sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" forward.zone
-sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" forward.zone
+sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" *.ign
+sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" *.ign
 base64 -w0 merge-master.ign > merge-master.64
 base64 -w0 merge-worker.ign > merge-worker.64
 base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
