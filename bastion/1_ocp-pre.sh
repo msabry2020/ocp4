@@ -19,14 +19,5 @@ wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-install-linux-$OCP_VERS
 tar xvf /tmp/openshift-client-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 tar xvf /tmp/openshift-install-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 
-# Download the OpenShift images
-mkdir /tmp/images
-wget $RHCOS_URL/rhcos-live-kernel-x86_64 -O /tmp/images/rhcos-live-kernel-x86_64
-wget $RHCOS_URL/rhcos-live-initramfs.x86_64.img -O /tmp/images/rhcos-live-initramfs.x86_64.img
-wget $RHCOS_URL/rhcos-live-rootfs.x86_64.img -O /tmp/images/rhcos-live-rootfs.x86_64.img
-
-# Copy the OpenShift images to the infra node
-rsync -av /tmp/images utility.$CLUSTER_NAME.$BASE_DOMAIN:/var/www/html/openshift4/
-
 # Generate the SSH key
 ssh-keygen -t rsa -b 4096 -N '' -f $INSTALL_HOME/$SSH_KEY_NAME
