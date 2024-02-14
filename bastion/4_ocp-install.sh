@@ -65,3 +65,4 @@ base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
 
 # Approve the pending CSRs that are not yet approved
 #oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs --no-run-if-empty oc adm certificate approve
+#oc get csr | grep node:
