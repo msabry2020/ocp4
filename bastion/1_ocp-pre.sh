@@ -11,6 +11,9 @@ SSH_KEY_NAME="ocp4upi"
 BASE_URL="https://mirror.openshift.com/pub/openshift-v4"
 RHCOS_URL="$BASE_URL/dependencies/rhcos/$OCP_RELEASE/$OCP_VERSION"
 
+# Create INSTALL_HOME
+mkdir -p $INSTALL_HOME
+
 # Download the OpenShift tools
 wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-client-linux-$OCP_VERSION.tar.gz -P /tmp
 wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-install-linux-$OCP_VERSION.tar.gz -P /tmp
