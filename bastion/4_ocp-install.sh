@@ -50,6 +50,10 @@ chmod +r *.ign
 # Copy the ignition config files to the utility node
 rsync -av *.ign utility.$CLUSTER_NAME.$BASE_DOMAIN:/var/www/html/openshift4/ignitions/
 
+base64 -w0 merge-master.ign > merge-master.64
+base64 -w0 merge-worker.ign > merge-worker.64
+base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
+
 # Wait for the bootstrap to complete
 #openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug
 
