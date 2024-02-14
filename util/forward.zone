@@ -25,10 +25,6 @@ control1.CLUSTER_NAME                   IN A CONTROL1_IP
 control2.CLUSTER_NAME                   IN A CONTROL2_IP
 control3.CLUSTER_NAME                   IN A CONTROL3_IP
 ;
-infra1.CLUSTER_NAME                   IN A INFRA1_IP 
-infra2.CLUSTER_NAME                   IN A INFRA2_IP
-infra3.CLUSTER_NAME                   IN A INFRA3_IP
-;
 worker1.CLUSTER_NAME                   IN A WORKER1_IP 
 worker2.CLUSTER_NAME                   IN A WORKER2_IP
 worker3.CLUSTER_NAME                   IN A WORKER3_IP
