@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Set the variables
-PORTS=(6443 22623 443 80 8080)
-SERVICES=(dns)
-ZONE="public"
-
+source vars.sh
 # Add the ports to the firewall
 for port in "${PORTS[@]}"; do
   firewall-cmd --add-port=$port/tcp --zone $ZONE --permanent
