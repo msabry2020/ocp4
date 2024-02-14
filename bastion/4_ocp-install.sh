@@ -10,7 +10,6 @@ SSH_KEY=$(cat $INSTALL_HOME/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
 CERT=$(cat $INSTALL_HOME/quay-install/quay-config/ssl.cert)
 
-set -x
 
 # Create the install directory
 rm -rf $INSTALL_DIR
