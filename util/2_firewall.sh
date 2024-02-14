@@ -2,7 +2,7 @@
 
 # Set the variables
 PORTS=(6443 22623 443 80 8080)
-SERVICES=(dns tftp)
+SERVICES=(dns)
 ZONE="public"
 
 # Add the ports to the firewall
