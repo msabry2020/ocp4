@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 # Set the variables
 INSTALL_HOME='/opt/install'
 BASE_DOMAIN='lab.local'
@@ -23,4 +22,5 @@ podman login -u init -p $INIT_PASSWORD $LOCAL_REGISTRY
 
 sed "s|auths\":{|${LOCAL_REGISTRY_SECRET}|g" $INSTALL_HOME/pull-secret | jq . > $LOCAL_SECRET_JSON 
 
+set -x
 oc adm release mirror -a ${LOCAL_SECRET_JSON} --from=quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_RELEASE}-${ARCHITECTURE} --to=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} --to-release-image=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE}
