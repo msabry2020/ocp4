@@ -50,6 +50,10 @@ chmod +r *.ign
 # Copy the ignition config files to the utility node
 rsync -av *.ign utility.$CLUSTER_NAME.$BASE_DOMAIN:/var/www/html/openshift4/ignitions/
 
+
+# Create base64-encoded ignition files
+sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" forward.zone
+sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" forward.zone
 base64 -w0 merge-master.ign > merge-master.64
 base64 -w0 merge-worker.ign > merge-worker.64
 base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
