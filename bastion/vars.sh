@@ -1,5 +1,6 @@
 packages='openssl podman jq'
 INSTALL_HOME="/opt/install"
+INSTALL_DIR=$INSTALL_HOME/ocp4_install
 BASE_DOMAIN='lab.local'
 CLUSTER_NAME='ocp4'
 OCP_RELEASE="4.12"
@@ -14,3 +15,6 @@ PRODUCT_REPO='openshift-release-dev'
 RELEASE_NAME="ocp-release"
 LOCAL_SECRET_JSON="$INSTALL_HOME/pull-secret.json"
 ARCHITECTURE=x86_64
+no_proxy=registry.$CLUSTER_NAME.$BASE_DOMAIN
+NTP_SERVER_IP="10.11.31.199"
+ALLOWED_NETWORK="10.11.31.0/24"
