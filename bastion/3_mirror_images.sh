@@ -18,8 +18,6 @@ echo $REGISTRY_TOKEN > $INSTALL_HOME/quay-install/registry_token.64
 echo -e "Modify pull secret JSON to include local registry authentication\n"
 sed "s|auths\":{|${LOCAL_REGISTRY_SECRET}|g" $INSTALL_HOME/pull-secret | jq . > $LOCAL_SECRET_JSON 
 
-echo -e "Enable verbose output for debugging\n"
-set -x
-
 echo -e "Mirror OpenShift release images to the local registry\n"
+set -x
 oc adm release mirror -a ${LOCAL_SECRET_JSON} --from=quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_VERSION}-${ARCHITECTURE} --to=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} --to-release-image=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE}

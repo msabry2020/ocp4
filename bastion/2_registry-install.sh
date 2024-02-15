@@ -16,10 +16,8 @@ echo -e "Add the port 8443 to the firewall\n"
 firewall-cmd --add-port=8443/tcp --permanent
 firewall-cmd --reload
 
-echo -e "Enable verbose output for debugging\n"
-set -x
-
 echo -e "Install the mirror registry\n"
+set -x
 mirror-registry install --quayHostname $REGISTRY --quayRoot $INSTALL_HOME/quay-install --initPassword $INIT_PASSWORD
 set +x
 

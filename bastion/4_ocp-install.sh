@@ -16,6 +16,9 @@ mkdir $INSTALL_DIR
 echo -e "Copy the install-config.yaml file to the install directory\n"
 cp install-config.yaml $INSTALL_DIR
 
+echo -e "Copy the ignition merging files"
+cp *.ign $INSTALL_DIR
+
 echo -e "Change directory to the install directory\n"
 cd $INSTALL_DIR
 
@@ -38,10 +41,8 @@ rm -f openshift/99_openshift-cluster-api_master-machines-*.yaml openshift/99_ope
 echo -e "Edit the cluster-scheduler-02-config.yml file to set mastersSchedulable to false\n"
 sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
 
-echo -e "Enable verbose output for debugging\n"
-set -x
-
 echo -e "Create the ignition configs\n"
+set -x
 openshift-install create ignition-configs --dir=.
 set +x
 
