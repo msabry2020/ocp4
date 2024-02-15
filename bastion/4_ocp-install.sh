@@ -16,7 +16,7 @@ mkdir $INSTALL_DIR
 echo -e "Copy the install-config.yaml file to the install directory\n"
 cp install-config.yaml $INSTALL_DIR
 
-echo -e "Copy the ignition merging files"
+echo -e "Copy the ignition merging files\n"
 cp *.ign $INSTALL_DIR
 
 echo -e "Change directory to the install directory\n"
