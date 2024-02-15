@@ -1,18 +1,18 @@
 #!/bin/bash
 
-echo "Load variables from vars file\n"
+echo -e "Load variables from vars file\n"
 source vars.sh
 
-echo "Create INSTALL_HOME\n"
+echo -e "Create INSTALL_HOME\n"
 mkdir -p $INSTALL_HOME
 
-echo "Download the OpenShift tools\n"
+echo -e "Download the OpenShift tools\n"
 wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-client-linux-$OCP_VERSION.tar.gz -P /tmp
 wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-install-linux-$OCP_VERSION.tar.gz -P /tmp
 
-echo "Extract the OpenShift tools\n"
+echo -e "Extract the OpenShift tools\n"
 tar xvf /tmp/openshift-client-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 tar xvf /tmp/openshift-install-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 
-echo "Generate the SSH key\n"
+echo -e "Generate the SSH key\n"
 ssh-keygen -t rsa -b 4096 -N '' -f $INSTALL_HOME/$SSH_KEY_NAME
