@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "Load variables from vars file\n"
+echo -e "Load variables from vars file\n"
 source vars.sh
 
-echo "# DNS Configuration #\n\n"
+echo -e "# DNS Configuration #\n\n"
 ## named.conf ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" named.conf 
 sed -i "s/REVERSE_SUBNET/${REVERSE_SUBNET}/g" named.conf 
@@ -39,7 +39,7 @@ cp forward.zone /var/named/${BASE_DOMAIN}.zone
 cp reverse.zone /var/named/${BASE_DOMAIN}.reverse.zone
 
 
-echo "# HAProxy Configuration #\n"
+echo -e "# HAProxy Configuration #\n"
 sed -i "s/BOOTSTRAP_IP/${BOOTSTRAP_IP}/g" haproxy.cfg
 sed -i "s/MASTER01_IP/${MASTER01_IP}/g" haproxy.cfg
 sed -i "s/MASTER02_IP/${MASTER02_IP}/g" haproxy.cfg
@@ -52,12 +52,12 @@ semanage boolean -m --on haproxy_connect_any
 setsebool -P haproxy_connect_any=1
 
 
-echo "# HTTP Server Configuration #\n"
+echo -e "# HTTP Server Configuration #\n"
 cp httpd.conf /etc/httpd/conf/httpd.conf
 mkdir -p /var/www/html/openshift4
 
 
-echo "# DHCP Server Configuration #\n"
+echo -e "# DHCP Server Configuration #\n"
 sed -i "s/MAC/${MAC}/g" dhcpd.conf
 sed -i "s/GW/${UTIL_IP}/g" dhcpd.conf
 sed -i "s/DNS/${UTIL_IP}/g" dhcpd.conf
@@ -73,7 +73,7 @@ sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf 
 
-echo "# Start and Enable Services #"
+echo -e "# Start and Enable Services #"
 set -x
 systemctl enable --now dhcpd
 systemctl enable --now named
