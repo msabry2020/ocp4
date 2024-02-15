@@ -1,16 +1,8 @@
 #!/bin/bash
+
 set -x
 
-# Set the variables
-INSTALL_HOME="/opt/install"
-BASE_DOMAIN='lab.local'
-CLUSTER_NAME='ocp4'
-OCP_RELEASE="4.12"
-OCP_VERSION="4.12.30"
-SSH_KEY_NAME="ocp4upi"
-BASE_URL="https://mirror.openshift.com/pub/openshift-v4"
-RHCOS_URL="$BASE_URL/dependencies/rhcos/$OCP_RELEASE/$OCP_VERSION"
-
+source vars.sh
 # Create INSTALL_HOME
 mkdir -p $INSTALL_HOME
 

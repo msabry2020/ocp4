@@ -1,10 +1,9 @@
 #!/bin/bash
+
 set -x
 
-# Set the variables
-INSTALL_HOME="/opt/install"
-REGISTRY="registry.ocp4.lab.local"
-export INIT_PASSWORD=$(openssl rand --base64 20)
+source vars.sh
+INIT_PASSWORD=$(openssl rand --base64 20)
 
 # Download the mirror registry binary
 wget https://mirror.openshift.com/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz -P $INSTALL_HOME

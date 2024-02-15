@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # Set the variables
-INSTALL_HOME="/opt/install"
-INSTALL_DIR=$INSTALL_HOME/ocp4_install
-BASE_DOMAIN='lab.local'
-CLUSTER_NAME='ocp4'
+source vars.sh
 REGISTRY_TOKEN=$(cat $INSTALL_HOME/quay-install/registry_token.64)
 SSH_KEY=$(cat $INSTALL_HOME/ocp4upi.pub)
 PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
