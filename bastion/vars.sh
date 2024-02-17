@@ -1,4 +1,4 @@
-packages='openssl podman jq'
+packages='openssl podman jq wget'
 INSTALL_HOME="/opt/install"
 INSTALL_DIR=$INSTALL_HOME/ocp4_install
 BASE_DOMAIN='lab.local'
