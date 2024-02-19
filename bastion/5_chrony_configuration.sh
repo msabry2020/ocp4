@@ -29,7 +29,7 @@ oc apply -f $INSTALL_DIR/99-worker-chrony.yaml
 
 echo -e "Check for each server if NTP source is as expected (run this command from Bastion VM)\n"
 sleep 30
-vms=("control1" "control2" "control3" "infra1" "infra2" "infra3" "worker1" "worker2" "worker3")
+vms=("master01" "master02" "master03" "worker01" "worker02" "worker03")
 for VM_NAME in "${vms[@]}"
 do
     ssh -i $INSTALL_HOME/ocp4upi core@$VM_NAME.$CLUSTER_NAME.$BASE_DOMAIN echo -e "Time on $VM_NAME sync with: " ; chronyc sources
