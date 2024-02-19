@@ -66,5 +66,6 @@ base64 -w0 merge-bootstrap.ign > merge-bootstrap.64
 #openshift-install wait-for install-complete  --dir=. --log-level=debug
 
 # Approve the pending CSRs that are not yet approved
+export KUBECONFIG=$INSTALL_DIR/auth/kubeconfig
 #oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs --no-run-if-empty oc adm certificate approve
 #oc get csr | grep node:

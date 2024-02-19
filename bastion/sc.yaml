@@ -1,0 +1,13 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: nfs-dynamic-provisioner
+reclaimPolicy: Retain
+parameters:
+  archiveOnDelete: "false"
+mountOptions:
+- nfsvers=3
+- nolock
