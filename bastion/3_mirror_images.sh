@@ -16,7 +16,7 @@ echo -e "Save the registry token to a file\n"
 echo $REGISTRY_TOKEN > $INSTALL_HOME/quay-install/registry_token.64
 
 echo -e "Modify pull secret JSON to include local registry authentication\n"
-sed "s|auths\":{|${LOCAL_REGISTRY_SECRET}|g" $INSTALL_HOME/pull-secret | jq . > $LOCAL_SECRET_JSON 
+sed "s|auths\":{|${LOCAL_REGISTRY_SECRET}|g" $PULL_SECRET_HOME/pull-secret | jq . > $LOCAL_SECRET_JSON 
 
 echo -e "Mirror OpenShift release images to the local registry\n"
 set -x
