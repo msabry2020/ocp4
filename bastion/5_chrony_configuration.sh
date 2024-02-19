@@ -3,22 +3,16 @@
 echo -e "Load variables from vars file\n"
 source vars.sh
 
-echo -e "Set NTP server IP on Bastion VM\n"
-sed -i "s|pool 2.rhel.pool.ntp.org iburst|server ${NTP_SERVER_IP}|g" /etc/chrony.conf
-sed -i "s|#allow 192.168.0.0/16|allow ${ALLOWED_NETWORK}|g" /etc/chrony.conf
-
-echo -e "Restart Chrony service\n"
-systemctl restart chronyd.service
-
-echo -e "Check current Chrony sources list\n"
-chronyc sources
-
 echo -e "Download the Butane binary\n"
 wget https://mirror.openshift.com/pub/openshift-v4/clients/butane/latest/butane-amd64 -P $INSTALL_HOME
 
 echo -e "Copy the binary to /usr/bin\n"
 chmod u+x $INSTALL_HOME/butane-amd64
 cp $INSTALL_HOME/butane-amd64 /usr/bin/butane
+
+echo -e "Set the NTP server IP in the butane files"
+sed -i "s/NTP_SERVER_IP/${NTP_SERVER_IP}/g" 99-master-chrony.bu
+sed -i "s/NTP_SERVER_IP/${NTP_SERVER_IP}/g" 99-worker-chrony.bu
 
 echo -e "Copy butane configs to the installation directory\n"
 cp 99-master-chrony.bu $INSTALL_DIR/

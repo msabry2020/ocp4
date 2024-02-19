@@ -1,10 +1,9 @@
-PULL_SECRET_HOME=/root/ocp4/bastion
+PULL_SECRET_HOME=/home/it/keys
 BASE_DOMAIN='adcb.com.eg'
 CLUSTER_NAME='cp4d'
-NTP_SERVER_IP="10.11.31.199"
-ALLOWED_NETWORK="10.11.31.0/24"
-INSTALL_HOME=/adcb/install
-INSTALL_DIR=$INSTALL_HOME/ocp4
+NTP_SERVER_IP="172.21.82.100"
+INSTALL_HOME=/home/it/ocp4
+INSTALL_DIR=$INSTALL_HOME/install
 ####
 packages='openssl podman jq wget'
 OCP_RELEASE="4.12"
