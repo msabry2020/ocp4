@@ -20,4 +20,5 @@ sed "s|auths\":{|${LOCAL_REGISTRY_SECRET}|g" $PULL_SECRET_HOME/pull-secret | jq 
 
 echo -e "Mirror OpenShift release images to the local registry\n"
 set -x
+export no_proxy=.$CLUSTER_NAME.$BASE_DOMAIN
 oc adm release mirror -a ${LOCAL_SECRET_JSON} --from=quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_VERSION}-${ARCHITECTURE} --to=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} --to-release-image=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE}
