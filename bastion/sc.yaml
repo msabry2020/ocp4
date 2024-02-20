@@ -4,7 +4,7 @@ metadata:
   name: nfs-sc
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
-provisioner: nfs-dynamic-provisioner
+provisioner: nfs-client-provisioner
 reclaimPolicy: Retain
 parameters:
   archiveOnDelete: "false"
