@@ -3,7 +3,7 @@ BASE_DOMAIN='adcb.com.eg'
 CLUSTER_NAME='cp4d'
 NTP_SERVER_IP="172.21.82.100"
 INSTALL_HOME=/home/it/ocp4
-INSTALL_DIR=$INSTALL_HOME/install
+INSTALL_DIR=$INSTALL_HOME/openshift-install
 ####
 packages='openssl podman jq wget'
 OCP_RELEASE="4.12"
