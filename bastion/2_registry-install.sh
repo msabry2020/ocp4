@@ -7,7 +7,7 @@ echo -e "Create the init password\n"
 INIT_PASSWORD=$(openssl rand --base64 20)
 
 echo -e "Download the mirror registry binary\n"
-wget https://mirror.openshift.com/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz -P $INSTALL_HOME
+wget -c --no-check-certificate https://mirror.openshift.com/pub/openshift-v4/clients/mirror-registry/latest/mirror-registry.tar.gz -P $INSTALL_HOME
 
 echo -e "Extract the binary to /usr/bin\n"
 tar xvf $INSTALL_HOME/mirror-registry.tar.gz -C /usr/bin

@@ -7,8 +7,8 @@ echo -e "Create INSTALL_HOME\n"
 mkdir -p $INSTALL_HOME
 
 echo -e "Download the OpenShift tools\n"
-wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-client-linux-$OCP_VERSION.tar.gz -P /tmp
-wget $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-install-linux-$OCP_VERSION.tar.gz -P /tmp
+wget -c --no-check-certificate $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-client-linux-$OCP_VERSION.tar.gz -P /tmp
+wget -c --no-check-certificate $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-install-linux-$OCP_VERSION.tar.gz -P /tmp
 
 echo -e "Extract the OpenShift tools\n"
 tar xvf /tmp/openshift-client-linux-$OCP_VERSION.tar.gz -C /usr/bin/
