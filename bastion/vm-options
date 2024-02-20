@@ -10,23 +10,23 @@ TRUE
 stealclock.enable
 TRUE
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.131::172.21.95.133:255.255.255.0:bootstrap.cp4d.adcb.com.eg::none nameserver=172.21.95.133
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.134::172.21.95.133:255.255.255.0:master01.cp4d.adcb.com.eg::none nameserver=172.21.95.133
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.135::172.21.95.133:255.255.255.0:master02.cp4d.adcb.com.eg::none nameserver=172.21.95.133
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.136::172.21.95.133:255.255.255.0:master03.cp4d.adcb.com.eg::none nameserver=172.21.95.133
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.137::172.21.95.133:255.255.255.0:worker01.cp4d.adcb.com.eg::none nameserver=172.21.95.133
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.138::172.21.95.133:255.255.255.0:worker02.cp4d.adcb.com.eg::none nameserver=172.21.95.133
 
-guestinfo.afterburn.initrd.network-kargs	
+guestinfo.afterburn.initrd.network-kargs
 ip=172.21.95.139::172.21.95.133:255.255.255.0:worker03.cp4d.adcb.com.eg::none nameserver=172.21.95.133
