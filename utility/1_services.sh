@@ -3,6 +3,11 @@
 echo -e "Load variables from vars file\n"
 source vars.sh
 
+#### Make changes to different directory #### 
+mkdir conf
+cp * conf
+cd conf
+
 echo -e "# DNS Configuration #\n\n"
 ## named.conf ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" named.conf 
@@ -87,3 +92,12 @@ systemctl enable --now named
 systemctl enable --now haproxy
 systemctl enable --now httpd
 systemctl enable --now tftp
+
+systemctl restart dhcpd
+systemctl restart named
+systemctl restart haproxy
+systemctl restart httpd
+systemctl restart tftp
+
+systemctl status dhcpd named haproxy httpd tftp
+
