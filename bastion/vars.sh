@@ -1,13 +1,14 @@
-PULL_SECRET_HOME=/home/it/keys
-BASE_DOMAIN='adcb.com.eg'
-CLUSTER_NAME='cp4d'
-NTP_SERVER_IP="172.21.82.100"
-INSTALL_HOME=/home/it/ocp4
+PULL_SECRET_HOME=/home/student/keys
+BASE_DOMAIN='example.com'
+CLUSTER_NAME='ocp4'
+UTIL_IP="172.25.250.253"
+NTP_SERVER_IP="192.168.50.254"
+INSTALL_HOME=/home/student/ocp4
 INSTALL_DIR=$INSTALL_HOME/openshift-install
 ####
 packages='openssl podman jq wget'
-OCP_RELEASE="4.12"
-OCP_VERSION="4.12.30"
+OCP_RELEASE="4.17"
+OCP_VERSION="4.17.17"
 SSH_KEY_NAME="ocp4upi"
 BASE_URL="https://mirror.openshift.com/pub/openshift-v4"
 RHCOS_URL="$BASE_URL/dependencies/rhcos/$OCP_RELEASE/$OCP_VERSION"
