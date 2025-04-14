@@ -73,9 +73,17 @@ sed -i "s/SUBNET/${SUBNET}/g" dhcpd.conf
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" dhcpd.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf 
 
+echo -e "# PXE Server Configuration #\n"
+sed -i "s/HTTP_SERVER_IP/${UTIL_IP}/g" default
+sed -i "s/DISK/${DISK}/g" default
+mkdir /var/lib/tftpboot/pxelinux.cfg
+cp default /var/lib/tftpboot/pxelinux.cfg
+cp -r /usr/share/syslinux/* /var/lib/tftpboot
+
 echo -e "# Start and Enable Services #"
 set -x
 systemctl enable --now dhcpd
 systemctl enable --now named
 systemctl enable --now haproxy
 systemctl enable --now httpd
+systemctl enable --now tftp
