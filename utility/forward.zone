@@ -14,8 +14,6 @@ api.CLUSTER_NAME                        IN A UTIL_IP
 api-int.CLUSTER_NAME                    IN A UTIL_IP
 *.apps.CLUSTER_NAME                     IN A UTIL_IP
 ;
-bastion.CLUSTER_NAME                    IN A BASTION_IP
-;
 bootstrap.CLUSTER_NAME                  IN A BOOTSTRAP_IP 
 ;
 master01.CLUSTER_NAME                   IN A MASTER01_IP

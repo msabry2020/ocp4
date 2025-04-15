@@ -22,7 +22,6 @@ sed -i "s/MASTER02_IP/${MASTER02_IP}/g" forward.zone
 sed -i "s/MASTER03_IP/${MASTER03_IP}/g" forward.zone
 sed -i "s/WORKER01_IP/${WORKER01_IP}/g" forward.zone
 sed -i "s/WORKER02_IP/${WORKER02_IP}/g" forward.zone
-sed -i "s/BASTION_IP/${BASTION_IP}/g" forward.zone
 ## reverse.zone ##
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" reverse.zone
 sed -i "s/CLUSTER_NAME/${CLUSTER_NAME}/g" reverse.zone
@@ -33,7 +32,6 @@ sed -i "s/MASTER02/$(echo $MASTER02_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/MASTER03/$(echo $MASTER03_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/WORKER01/$(echo $WORKER01_IP | awk -F. '{print $4}')/g" reverse.zone
 sed -i "s/WORKER02/$(echo $WORKER02_IP | awk -F. '{print $4}')/g" reverse.zone
-sed -i "s/BASTION/$(echo $BASTION_IP | awk -F. '{print $4}')/g" reverse.zone
 ## named.conf ##
 cp named.conf /etc/named.conf
 cp forward.zone /var/named/${BASE_DOMAIN}.zone 
