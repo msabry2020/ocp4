@@ -1,9 +1,8 @@
-PULL_SECRET_HOME=/home/student/keys
 BASE_DOMAIN='example.com'
 CLUSTER_NAME='ocp4'
 UTIL_IP="172.25.250.253"
 NTP_SERVER_IP="192.168.50.254"
-INSTALL_HOME=/home/student/install
+INSTALL_HOME=/home/lab/install
 INSTALL_DIR=$INSTALL_HOME/openshift-install
 ####
 packages='openssl podman jq wget'
