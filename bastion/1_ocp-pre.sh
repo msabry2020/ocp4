@@ -11,14 +11,14 @@ wget -c --no-check-certificate $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshi
 wget -c --no-check-certificate $BASE_URL/x86_64/clients/ocp/$OCP_VERSION/openshift-install-linux-$OCP_VERSION.tar.gz -P /tmp
 
 echo -e "Extract the OpenShift tools\n"
-tar xvf /tmp/openshift-client-linux-$OCP_VERSION.tar.gz -C /usr/bin/
-tar xvf /tmp/openshift-install-linux-$OCP_VERSION.tar.gz -C /usr/bin/
+tar xvf --skip-old-files /tmp/openshift-client-linux-$OCP_VERSION.tar.gz -C /usr/bin/
+tar xvf --skip-old-files /tmp/openshift-install-linux-$OCP_VERSION.tar.gz -C /usr/bin/
 
 echo -e "Download the OpenShift images\n"
-mkdir /tmp/images
-wget $RHCOS_URL/rhcos-live-kernel-x86_64 -O /tmp/images/rhcos-live-kernel-x86_64
-wget $RHCOS_URL/rhcos-live-initramfs.x86_64.img -O /tmp/images/rhcos-live-initramfs.x86_64.img
-wget $RHCOS_URL/rhcos-live-rootfs.x86_64.img -O /tmp/images/rhcos-live-rootfs.x86_64.img
+mkdir -p /tmp/images
+wget -c --no-check-certificate $RHCOS_URL/rhcos-live-kernel-x86_64 -O /tmp/images/rhcos-live-kernel-x86_64
+wget -c --no-check-certificate $RHCOS_URL/rhcos-live-initramfs.x86_64.img -O /tmp/images/rhcos-live-initramfs.x86_64.img
+wget -c --no-check-certificate $RHCOS_URL/rhcos-live-rootfs.x86_64.img -O /tmp/images/rhcos-live-rootfs.x86_64.img
 
 echo -e "Copy the OpenShift images to the infra node\n"
 rsync -av /tmp/images root@$UTIL_IP:/var/www/html/openshift4/
