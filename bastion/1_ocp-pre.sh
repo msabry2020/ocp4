@@ -21,7 +21,7 @@ wget -nc --no-check-certificate $RHCOS_URL/rhcos-live-initramfs.x86_64.img -O /t
 wget -nc --no-check-certificate $RHCOS_URL/rhcos-live-rootfs.x86_64.img -O /tmp/images/rhcos-live-rootfs.x86_64.img
 
 echo -e "Copy the OpenShift images to the infra node\n"
-rsync --ignore-existing -av /tmp/images root@$UTIL_IP:/var/www/html/openshift4/
+rsync --ignore-existing -av /tmp/images /var/www/html/openshift4/
 
 echo -e "Generate the SSH key\n"
 ssh-keygen -t rsa -b 4096 -N '' -f $INSTALL_HOME/$SSH_KEY_NAME

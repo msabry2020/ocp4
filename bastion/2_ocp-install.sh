@@ -51,7 +51,7 @@ echo -e "Change the permissions of the ignition config files\n"
 chmod +r *.ign
 
 echo -e "Copy the ignition config files to the utility node\n"
-rsync -av *.ign root@$UTIL_IP:/var/www/html/openshift4/ignitions/
+rsync -av *.ign /var/www/html/openshift4/ignitions/
 
 echo -e "Create base64-encoded ignition files\n"
 sed -i "s/BASE_DOMAIN/${BASE_DOMAIN}/g" *.ign
