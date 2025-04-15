@@ -1,3 +1,22 @@
+BOOTSTRAP_IP="192.168.50.9"
+MASTER01_IP="192.168.50.10"
+MASTER02_IP="192.168.50.11"
+MASTER03_IP="192.168.50.12"
+WORKER01_IP="192.168.50.13"
+WORKER02_IP="192.168.50.14"
+MAC="52:54:00:00:32"
+packages='dhcp-server bind haproxy httpd tftp syslinux openssl podman jq wget'
+PORTS=(6443 22623 443 80 8080)
+SERVICES=(dns tftp ntp)
+ZONE="public"
+BASE_DOMAIN='example.com'
+CLUSTER_NAME='ocp4'
+SUBNET="192.168.50"
+REVERSE_SUBNET=$(echo "$SUBNET" | awk -F'.' '{print $3"."$2"."$1}')
+UTIL_IP="192.168.50.254"
+DISK='vda'
+
+
 BASE_DOMAIN='example.com'
 CLUSTER_NAME='ocp4'
 UTIL_IP="172.25.250.253"
