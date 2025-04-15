@@ -4,10 +4,10 @@ echo -e "Load variables from vars file\n"
 source vars.sh
 
 echo -e "initialize install-config variables\n"
-REGISTRY_TOKEN=$(cat $INSTALL_HOME/quay-install/registry_token.64)
+#REGISTRY_TOKEN=$(cat $INSTALL_HOME/quay-install/registry_token.64)
 SSH_KEY=$(cat $INSTALL_HOME/ocp4upi.pub)
-PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
-CERT=$(cat $INSTALL_HOME/quay-install/quay-config/ssl.cert)
+#PULL_SECRET="{\"auths\":{\"registry.${CLUSTER_NAME}.${BASE_DOMAIN}:8443\":{\"auth\":\"${REGISTRY_TOKEN}\",\"email\":\"admin@${BASE_DOMAIN}\"}}}"
+#CERT=$(cat $INSTALL_HOME/quay-install/quay-config/ssl.cert)
 
 echo -e "Create the install directory\n"
 rm -rf $INSTALL_DIR
@@ -18,6 +18,7 @@ cp install-config.yaml $INSTALL_DIR
 
 echo -e "Copy the ignition merging files\n"
 cp *.ign $INSTALL_DIR
+cp PULL_SECRET $INSTALL_DIR
 
 echo -e "Change directory to the install directory\n"
 cd $INSTALL_DIR
@@ -25,9 +26,9 @@ cd $INSTALL_DIR
 echo -e "Edit the the install-config file\n"
 sed -i "s|CLUSTER_NAME|${CLUSTER_NAME}|g" install-config.yaml
 sed -i "s|BASE_DOMAIN|${BASE_DOMAIN}|g" install-config.yaml
-sed -i "s|PULL_SECRET|${PULL_SECRET}|g" install-config.yaml
+sed -i "s|PULL_SECRET|$(cat pullSecret)|g" install-config.yaml
 sed -i "s|SSH_KEY|${SSH_KEY}|g" install-config.yaml
-sed  's/^/  /' $INSTALL_HOME/quay-install/quay-config/ssl.cert >> install-config.yaml
+#sed  's/^/  /' $INSTALL_HOME/quay-install/quay-config/ssl.cert >> install-config.yaml
 
 echo -e "Backup install-config file\n"
 cp install-config.yaml $INSTALL_HOME

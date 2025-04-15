@@ -22,11 +22,3 @@ platform:
 fips: false
 sshkey: 'SSH_KEY'
 pullSecret: 'PULL_SECRET'
-imageContentSources:
-- mirrors:
-  - registry.CLUSTER_NAME.BASE_DOMAIN:8443/openshift4
-  source: quay.io/openshift-release-dev/ocp-release
-- mirrors:
-  - registry.CLUSTER_NAME.BASE_DOMAIN:8443/openshift4
-  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
-additionalTrustBundle: | 
