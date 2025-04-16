@@ -1,3 +1,10 @@
+apiVersion: project.openshift.io/v1
+description: "NFS Dynamic"
+displayName: nfs-dynamic-namespace
+kind: ProjectRequest
+metadata:
+    name: nfs-dynamic-namespace
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
