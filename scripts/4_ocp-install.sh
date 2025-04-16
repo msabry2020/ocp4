@@ -50,7 +50,7 @@ echo -e "Change the permissions of the ignition config files\n"
 chmod +r *.ign
 
 echo -e "Copy the ignition config files to the utility node\n"
-rsync -av *.ign /var/www/html/openshift4/ignitions/
+sudo rsync -av *.ign /var/www/html/openshift4/ignitions/
 
 # Wait for the bootstrap to complete
 #openshift-install wait-for bootstrap-complete  --dir=. --log-level=debug

@@ -11,12 +11,12 @@ chmod u+x $INSTALL_HOME/butane-amd64
 sudo cp $INSTALL_HOME/butane-amd64 /usr/bin/butane
 
 echo -e "Set the NTP server IP in the butane files"
-sed -i "s/NTP_SERVER_IP/${NTP_SERVER_IP}/g" 99-master-chrony.bu
-sed -i "s/NTP_SERVER_IP/${NTP_SERVER_IP}/g" 99-worker-chrony.bu
+sed -i "s/NTP_SERVER_IP/${NTP_SERVER_IP}/g" ../config/99-master-chrony.bu
+sed -i "s/NTP_SERVER_IP/${NTP_SERVER_IP}/g" ../config/99-worker-chrony.bu
 
 echo -e "Copy butane configs to the installation directory\n"
-cp 99-master-chrony.bu $INSTALL_DIR/
-cp 99-worker-chrony.bu $INSTALL_DIR/
+cp ../config/99-master-chrony.bu $INSTALL_DIR/
+cp ../config/99-worker-chrony.bu $INSTALL_DIR/
 
 echo -e "Generate MachineConfig obhect files to contain the configuration for nodes\n"
 sudo /usr/bin/butane $INSTALL_DIR/99-master-chrony.bu -o $INSTALL_DIR/99-master-chrony.yaml
