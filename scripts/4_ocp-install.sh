@@ -14,11 +14,10 @@ rm -rf $INSTALL_DIR
 mkdir $INSTALL_DIR
 
 echo -e "Copy the install-config.yaml file to the install directory\n"
-cp install-config.yaml $INSTALL_DIR
+cp ../config/install-config.yaml $INSTALL_DIR
 
-echo -e "Copy the ignition merging files\n"
-cp *.ign $INSTALL_DIR
-cp pullSecret $INSTALL_DIR
+echo -e "Copy pullSecret\n"
+cp ../pullSecret $INSTALL_DIR
 
 echo -e "Change directory to the install directory\n"
 cd $INSTALL_DIR

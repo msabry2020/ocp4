@@ -4,8 +4,9 @@ echo -e "Load variables from vars file\n"
 source vars.sh
 
 #### Make changes to different directory #### 
-mkdir conf
-cp * conf
+cd ..
+mkdir -p conf
+cp config/* conf
 cd conf
 
 echo -e "# DNS Configuration #\n\n"
