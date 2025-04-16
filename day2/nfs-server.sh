@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ## Configure NFS Storage ##
----------------------------
 dnf -y install nfs-utils
 mkdir /srv/nfs
 echo '/srv/nfs *(rw,sync,no_wdelay,no_root_squash,insecure,fsid=0)' > /etc/exports
