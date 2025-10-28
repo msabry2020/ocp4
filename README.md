@@ -119,6 +119,6 @@ Configures NTP (`chrony`) on all OpenShift nodes **post-installation**.
 - The utility server must be reachable by all OpenShift nodes.
 - DNS must resolve the cluster domain correctly.
 - DHCP must assign static IPs based on MAC addresses.
-- You may need to manually provision VMs or bare-metal nodes with the correct boot parameters.
+- Ensure to replace the pullSecret file content with your pull-secret that can be dowloaded from https://console.redhat.com/openshift/downloads#tool-pull-secret
 
 ---
